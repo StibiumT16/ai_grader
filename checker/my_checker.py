@@ -4,6 +4,7 @@
 
 import json
 import numpy as np
+from tqdm import tqdm, trange
 
 from checker.base import BaseChecker
 from instance.problem import *
@@ -12,6 +13,7 @@ from utils.wrappers.example_grading import format_openai_inputs
 from utils.wrappers.my_grading import my_format_openai_inputs
 from utils.apis.dify_api import completion_messages
 from utils.apis.openai_api import openai_completion
+from LLM import APILLM
 
 # tools 
 # wrapper for checker api
@@ -21,22 +23,16 @@ class MyChecker(BaseChecker):
         self.sample_size = sample_size
         self.grading_key = grading_key
 
-    def parse_grading_response(self, response):
-        response = response.strip("```json").strip("```").replace("\\", "\\\\").replace("\\\\\\\\", "\\\\")
-        response = json.loads(response)
-        process = response["process"]
-        score = int(response["score"])
-        return process, score
-
     def cal_mode(self, ary: list): # 计算众数和对应的id(取第一个)
         count_list = np.bincount(ary)
         mode = np.where(count_list == count_list.max())[0][-1] # 取最大的一个众数
         id = np.where(ary == mode)[0][0]
         return int(mode), id
         
-    def check(self, ref_pa, student_pa):
-        from tqdm import tqdm, trange
-
+    def check(self, model, ref_pa, student_pa):
+        
+        llm = APILLM(model=model)
+        
         for problem_id, ref_problem in tqdm(ref_pa.problems.items(), desc="Checking problems", total=len(ref_pa.problems)):
             student_problem = student_pa.problems[problem_id]
             
@@ -64,8 +60,12 @@ class MyChecker(BaseChecker):
                 )
                 
                 overall_processes, sample_overall_scores = [], []
-                for _ in range(self.sample_size):
-                    response = openai_completion(**overall_check_inputs)
+                for _ in range(self.sample_size):      
+                    response = llm.generate(
+                        instruction=overall_check_inputs["system_prompt"],
+                        prompt=overall_check_inputs["user_prompt"],
+                        history=overall_check_inputs['history']
+                    )
                     process, score = self.parse_grading_response(response)
                     overall_processes.append(process)
                     sample_overall_scores.append(score)                
@@ -81,7 +81,11 @@ class MyChecker(BaseChecker):
                         student_solution,
                         id,
                     )
-                    response = openai_completion(**rule_based_inputs)
+                    response = llm.generate(
+                        instruction=rule_based_inputs["system_prompt"],
+                        prompt=rule_based_inputs["user_prompt"],
+                        history=rule_based_inputs['history']
+                    )
                     process, score = self.parse_grading_response(response)
 
                     if not rule.check_valid_score(score):
@@ -92,7 +96,7 @@ class MyChecker(BaseChecker):
                 
                 rule_based_score = sum(rule_based_scores)
                 
-                print(problem_id, subproblem_id, overall_check_score, rule_based_score)
+                tqdm.write(f"Problem {problem_id} sub-Problem {subproblem_id}:  Overall Score {overall_check_score} from {sample_overall_scores}; Rule Score{rule_based_score}")
                 
                 for i, rule in enumerate(ref_solution.rules):
                     if i == 0: student_solution.add_score(rule, rule_based_processes[i], (overall_check_score + rule_based_score) / 2)
