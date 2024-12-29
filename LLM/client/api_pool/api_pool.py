@@ -13,7 +13,7 @@ def query_model(messages, model_name, sys_msg=None, temperature=0.7, max_tokens=
     
     if model_name == "glm-4-air":
         # https://open.bigmodel.cn/dev/api/normal-model/glm-4#sdk
-        client = ZhipuAI(api_key="a0f3f88730f0126e710b3f6f6f63b019.v6Z11HTd1mJDGHWg") 
+        client = ZhipuAI(api_key="d53d76ddaf28b10adb14ff67deb7196f.LEtOwntH3vx08gP1") 
         response = client.chat.completions.create(
             model=model_name,
             messages=messages,

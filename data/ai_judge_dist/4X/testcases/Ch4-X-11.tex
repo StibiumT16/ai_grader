@@ -1,0 +1,860 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{ctex} % 支持中文
+\setlength{\parindent}{0pt}  % 取消全局缩进
+\title{组合数学: 第四章作业}
+
+\begin{document}
+
+\maketitle
+
+\section*{4.1}
+
+\textbf{解答：}
+
+    \section*{(1) 证明：\( G_n - 3G_{n-1} + G_{n-2} = 0 \quad (n \geq 2) \)}
+    
+    
+    由 \( G_n = F_{2n} \)有：
+    \[
+    G_{n-1} = F_{2(n-1)} = F_{2n-2}, \quad G_{n-2} = F_{2(n-2)} = F_{2n-4}.
+    \]
+    
+    代入原式得：
+    
+    \[
+    G_n - 3G_{n-1} + G_{n-2} = F_{2n} - 3F_{2n-2} + F_{2n-4}.
+    \]
+    
+    又 \( F_n = F_{n-1} + F_{n-2} \)，可得：
+    
+    \[
+    F_{2n} = F_{2n-1} + F_{2n-2}, \quad F_{2n-2} = F_{2n-3} + F_{2n-4}.
+    \]
+    
+    再次代入后得到：
+    
+    \[
+    F_{2n} - 3F_{2n-2} + F_{2n-4} = F_{2n-3} + F_{2n-4} - F_{2n-2} = 0,
+    \]
+    
+    因此原式 \( G_n - 3G_{n-1} + G_{n-2} = 0 \) 对于 \( n \geq 2 \) 成立。
+
+    \section*{(2) 求数列 \( \{G_n\} \) 的母函数。}
+    
+    设 $H(x) = G_0 + G_1 x + G_2 x^2 + G_3 x^3 + \dots$，则
+    \begin{align}
+    H(x) &= G_0 + G_1 x + G_2 x^2 + G_3 x^3 + G_4 x^4 + \dots \tag{1} \\
+    3xH(x) &= 3G_0 x + 3G_1 x^2 + 3G_2 x^3 + 3G_3 x^4 + \dots \tag{2} \\
+    x^2 H(x) &= G_0 x^2 + G_1 x^3 + G_2 x^4 + \dots \tag{3}
+    \end{align}
+    
+    \noindent
+    由 (1) - (2) + (3)，得：
+    \[
+    (1 - 3x + x^2) H(x) = G_0 + G_1 x - 3G_0 x
+    \]
+    
+    \noindent
+    又已知 $G_n = F_{2n}$，则 $G_0 = F_0 = 0$，$G_1 = F_2 = 1$
+    
+    \noindent
+    所以，
+    \[
+    H(x) = \frac{x}{1 - 3x + x^2} = \frac{x}{\left(\frac{3 + \sqrt{5}}{2} - x\right)\left(\frac{3 - \sqrt{5}}{2} - x\right)}
+    \]
+    
+    设
+    \[
+    H(x) = \frac{A}{\frac{3 + \sqrt{5}}{2} - x} + \frac{B}{\frac{3 - \sqrt{5}}{2} - x}
+    \]
+    
+    则有：
+    \[
+    \begin{cases}
+    A + B = 1 \\
+    \frac{3 - \sqrt{5}}{2} A + \frac{3 + \sqrt{5}}{2} B = 0
+    \end{cases}
+    \Rightarrow 
+    \begin{cases}
+    A = \frac{5 + 3\sqrt{5}}{10} \\
+    B = \frac{5 - 3\sqrt{5}}{10}
+    \end{cases}
+    \]
+    即:
+    \[
+    H(x) = -\frac{\sqrt{5}}{5} \sum_{n=0}^{\infty} \left( \frac{3 - \sqrt{5}}{2} x \right)^n + \frac{\sqrt{5}}{5} \sum_{n=0}^{\infty} \left( \frac{3 + \sqrt{5}}{2} x \right)^n
+    \]
+    
+    \[
+    \boxed{ = \frac{\sqrt{5}}{5} \sum_{n=0}^{\infty} \left[ \left( \frac{3 + \sqrt{5}}{2} \right)^n - \left( \frac{3 - \sqrt{5}}{2} \right)^n \right] x^n}
+    \]
+
+\section*{4.2}
+
+\textbf{解答：}
+
+由题意有：
+
+\[
+(1 - x + x^2)A(x) = 1.
+\]
+
+将 $A(x)$ 展开，得到：
+
+\[
+A(x) = \sum_{n=0}^{\infty} a_n x^n.
+\]
+
+因此代入后得到，
+
+\[
+(1 - x + x^2) \sum_{n=0}^{\infty} a_n x^n = 1.
+\]
+
+展开后有：
+
+\[
+\sum_{n=0}^{\infty} a_n x^n - \sum_{n=0}^{\infty} a_n x^{n+1} + \sum_{n=0}^{\infty} a_n x^{n+2} = 1.
+\]
+
+将求和打开：
+
+\[
+a_0 + (a_1 - a_0) x + (a_2 - a_1 + a_0) x^2 + (a_3 - a_2 + a_1) x^3 + \cdots = 1.
+\]
+
+为了使上式成立，必须有每一阶的系数都为零，因此，得到以下递推关系：
+
+\[
+a_n - a_{n-1} + a_{n-2} = 0, \quad \text{对于} \, n \geq 2.
+\]
+
+\[a_1 = a_0
+\]
+
+即数列 $\{a_n\}$ 满足以下二阶齐次线性常系数递推关系：
+
+\[
+a_n = a_{n-1} - a_{n-2} \quad (n \geq 2).
+\]
+
+母函数 $A(x)$ 的常数项即为 $a_0$, 可以直接得到：
+
+\[
+a_0 = A(0) = \frac{1}{1 - 0 + 0^2} = 1,
+\]
+
+\[
+a_1 = \left. \frac{d}{dx} A(x) \right|_{x=0} = \left. \frac{d}{dx} \frac{1}{1 - x + x^2} \right|_{x=0}.
+\]
+
+又$A(x)$ 的导数：
+
+\[
+A'(x) = - \frac{-1 + 2x}{(1 - x + x^2)^2}.
+\]
+
+代入 $x = 0$：
+
+\[
+a_1 = \frac{-(-1 + 0)}{(1 - 0 + 0^2)^2} = \frac{1}{1^2} = 1.
+\]
+
+因此：
+
+\[
+a_0 = a_1 = 1.
+\]
+
+最终得到,
+
+数列 $\{a_n\}$ 满足的二阶齐次线性常系数递推关系为：
+
+\[
+\boxed{a_n = a_{n-1} - a_{n-2} \quad (n \geq 2)}
+\]
+
+且初始条件为：
+
+\[
+\boxed{a_0 = 1, \quad a_1 = 1}
+\]
+
+\section*{4.3}
+\textbf{解答：}
+
+
+\[
+ 3 \text{ 和 } -1 \text{ 为特征根}
+\]
+
+特征方程为
+\[
+x^2 - 2x - 3 = 0
+\]
+
+最终得到, 满足题意的一个线性常系数递推关系为：
+
+\[
+\boxed{a_n - 2a_{n-1} - 3a_{n-2} = 0}
+\]
+
+\section*{4.4}
+\textbf{解答:}
+
+\[
+a_n - 2a_{n-1} + a_{n-2} = 5
+\]
+
+齐次特征方程是：
+
+\[
+r^2 - 2r + 1 = 0 \quad \Rightarrow \quad (r - 1)^2 = 0,
+\]
+
+所以，齐次方程的解为：
+
+\[
+a_n^{\text{齐}} = A + Bn.
+\]
+
+
+因为\[5 = 1^n * 5\], 且1是二重根, 设特解的形式为：
+
+\[
+a_n^{\text{特}} = k n^2.
+\]
+
+将特解代入递推关系 \(a_n - 2a_{n-1} + a_{n-2} = 5\) 中:
+
+- \(a_n^{\text{特}} = k n^2\),
+
+- \(a_{n-1}^{\text{特}} = k (n-1)^2 = k (n^2 - 2n + 1)\),
+
+- \(a_{n-2}^{\text{特}} = k (n-2)^2 = k (n^2 - 4n + 4)\).
+
+代入递推关系：
+
+\[
+a_n^{\text{特}} - 2a_{n-1}^{\text{特}} + a_{n-2}^{\text{特}} = k n^2 - 2k (n^2 - 2n + 1) + k (n^2 - 4n + 4).
+\]
+
+展开各项并合并同类项：
+
+\[
+k n^2 - 2k (n^2 - 2n + 1) + k (n^2 - 4n + 4) = k n^2 - 2k n^2 + 4k n - 2k + k n^2 - 4k n + 4k.
+\]
+
+整理后：
+
+\[
+= (k n^2 - 2k n^2 + k n^2) + (4k n - 4k n) + (-2k + 4k).
+\]
+
+简化：
+
+\[
+= 0n^2 + 0n + 2k.
+\]
+
+要求这个表达式等于 5，因此有：
+
+\[
+2k = 5 \quad \Rightarrow \quad k = \frac{5}{2}.
+\]
+
+因此，通解为齐次解和特解的和：
+
+\[
+a_n = a_n^{\text{齐}} + a_n^{\text{特}} = A + Bn + \frac{5}{2}n^2.
+\]
+
+- 当 \(n = 0\) 时：
+
+\[
+a_0 = A + B \times 0 + \frac{5}{2} \times 0^2 = 1 \quad \Rightarrow \quad A = 1.
+\]
+
+- 当 \(n = 1\) 时：
+
+\[
+a_1 = A + B \times 1 + \frac{5}{2} \times 1^2 = 2 \quad \Rightarrow \quad 1 + B + \frac{5}{2} = 2.
+\]
+
+解得：
+
+\[
+B + \frac{7}{2} = 2 \quad \Rightarrow \quad B = 2 - \frac{7}{2} = -\frac{3}{2}.
+\]
+
+最终得到：
+\[
+\boxed{
+a_n = 1 - \frac{3}{2}n + \frac{5}{2}n^2}
+\]
+
+\section*{4.5}
+\textbf{解答:}
+
+设 \( b_n \) 为不包含 "AB" 子串的字符串数目：
+
+- 假设第一位4种可能都取, 有 \(4b_{n-1} \)种情况
+
+- 但是考虑到其中会出现第一位为A, 第二位为B的违法情况, 有\(b_{n-2} \)种
+
+因此，递推关系为：
+\[
+b_n = 4b_{n-1} - b_{n-2}
+\]
+
+对于 \( a_n \)，可以用总数减去不包含 "AB" 的情况：
+\[
+a_n = 4^n - b_n
+\]
+
+计算得到以下初始条件：
+\[
+b_0 = 1, \quad b_1 = 4, \quad b_2 = 15, \quad b_3 = 56
+\]
+
+构造其特征方程：
+\[
+q^2 - 4q + 1 = 0
+\]
+
+解这个特征方程，得到两个特征根：
+\[
+q = 2 \pm \sqrt{3}
+\]
+
+递推关系的通解可以表示为：
+\[
+b_n = A (2 + \sqrt{3})^n + B (2 - \sqrt{3})^n
+\]
+
+
+使用初始条件 \( b_0 = 1 \) 和 \( b_1 = 4 \) 来确定常数 \( A \) 和 \( B \)：
+
+1. 当 \( n = 0 \) 时：
+   \[
+   b_0 = A + B = 1
+   \]
+
+2. 当 \( n = 1 \) 时：
+   \[
+   b_1 = A(2 + \sqrt{3}) + B(2 - \sqrt{3}) = 4
+   \]
+
+解方程组：
+\[
+\begin{cases}
+A + B = 1 \\
+A(2 + \sqrt{3}) + B(2 - \sqrt{3}) = 4
+\end{cases}
+\]
+得到：
+\[
+A = \frac{3 + 2\sqrt{3}}{6}, \quad B = \frac{3 - 2\sqrt{3}}{6}
+\]
+
+
+因此，\( b_n \) 的通项公式为：
+\[
+b_n = \frac{3 + 2\sqrt{3}}{6} (2 + \sqrt{3})^n + \frac{3 - 2\sqrt{3}}{6} (2 - \sqrt{3})^n
+\]
+
+根据关系 \( a_n = 4^n - b_n \)，最终得到包含至少一个 "AB" 子串的 \( n \) 位字符串数目：
+\[
+\boxed{a_n = 4^n - \left(\frac{3 + 2\sqrt{3}}{6} (2 + \sqrt{3})^n + \frac{3 - 2\sqrt{3}}{6} (2 - \sqrt{3})^n\right)}
+\]
+
+\section*{4.6}
+\textbf{解答:}
+
+假设圆盘个数 \(n\) 为奇数：
+
+\begin{enumerate}
+    \item 先将 \(n-1\) 个盘从\(A\)通过 \(C\) 移动到 \(B\)；
+    \item 将第 \(n\) 个盘从\(A\)移动到 \(C\)；
+    \item 再将 \(n-3\) 个盘从从\(B\)通过 \(C\) 移动到 \(A\)；
+    \item 最后将第 \(n-2\) 个盘移动到 \(C\)。
+    \item 循环往复
+\end{enumerate}
+
+若 \(n\) 为偶数：
+
+\begin{enumerate}
+    \item 先将 \(n-1\) 个盘从\(A\)通过 \(B\) 移动到 \(C\)；
+    \item 将第 \(n\) 个盘从\(A\)移动到 \(B\)；
+    \item 再将 \(n-3\) 个盘从\(C\)通过 \(B\) 移动到 \(A\)；
+    \item 最后将第 \(n-2\) 个盘移动到 \(B\)。
+    \item 循环往复
+\end{enumerate}
+
+对于 \(n\) 为奇数或者偶数的情形，上述步骤均成立，只不过 \(B\) 和 \(C\) 的角色对调。
+
+因此，有递推关系：
+\[
+K(n) = H(n-1) + 1 + H(n-3) + 1 + K(n-3)
+\]
+其中：
+\[
+K(1) = 1, \quad K(2) = 2, \quad K(3) = 5, \quad H(k) \text{ 为汉诺塔步数序列。}
+\]
+
+递推关系可化简为：
+\[
+K(n) - K(n-3) = 2^{n-1} + 2^{n-3}
+\]
+\[
+2[K(n-1) - K(n-4)] = 2^{n-1} + 2^{n-3}
+\]
+
+得到特征方程：
+\[
+(x-2)(x^3-1) = 0
+\]
+化简为：
+\[
+(x-2)(x-1)(x^2 + x + 1) = 0
+\]
+
+解得：
+\[
+x_1 = 1, \quad x_2 = 2, \quad x_{3,4} = -\frac{1}{2} \pm \frac{\sqrt{3}}{2}i
+\]
+
+所以通解为：
+\[
+K(n) = A \cdot 2^n + B + C \cos \frac{2}{3} \pi n + D \sin \frac{2}{3} \pi n
+\]
+
+使用初始条件 \(K(1) = 1\), \(K(2) = 2\), \(K(3) = 5\)，以及通过递推公式计算的 \(K(4) = 11\)，建立方程组：
+\[
+\begin{cases}
+K(1) = 2A + B - \frac{1}{2}C + \frac{\sqrt{3}}{2}D = 1, \\
+K(2) = 4A + B - \frac{1}{2}C - \frac{\sqrt{3}}{2}D = 2, \\
+K(3) = 8A + B + C = 5, \\
+K(4) = 16A + B - \frac{1}{2}C + \frac{\sqrt{3}}{2}D = 11.
+\end{cases}
+\]
+
+解这个方程组，得到：
+\[
+A = \frac{5}{7}, \quad B = -\frac{2}{3}, \quad C = -\frac{1}{21}, \quad D = \frac{\sqrt{3}}{7}.
+\]
+
+因此，通解的具体表达式为：
+\[
+\boxed{ K(n) = \frac{5}{7} \cdot 2^n - \frac{2}{3} - \frac{1}{21} \cos \left( \frac{2\pi}{3} n \right) + \frac{\sqrt{3}}{7} \sin \left( \frac{2\pi}{3} n \right)}
+\]
+
+\section*{4.7}
+\textbf{解答:}
+
+设:
+
+\begin{itemize}
+    \item \( a_n \)：长度为 \( n \) 的、最后两个字母 \textbf{不相同} 的字符串数量。
+    \item \( b_n \)：长度为 \( n \) 的、最后两个字母 \textbf{相同但前一个字母与前前一个字母不同} 的字符串数量（即最后两个字母相同，但没有出现 3 连同字母）。
+\end{itemize}
+
+总的方案数 \( S(n) \) 为：
+\[
+S(n) = a_n + b_n
+\]
+
+1. 对于 \( a_n \)：
+   \begin{itemize}
+       \item 来源 1：长度为 \( n-1 \) 的字符串，最后两个字母不相同，然后添加一个与前一个字母 \textbf{不相同} 的字母。
+       \[
+       \text{方案数为: } a_{n-1} \times (k - 1)
+       \]
+       \item 来源 2：长度为 \( n-1 \) 的字符串，最后两个字母相同，然后添加一个与前一个字母 \textbf{不相同} 的字母（防止出现 3 连同字母）。
+       \[
+       \text{方案数为:  }  b_{n-1} \times (k - 1)
+       \]
+       \item 总计：
+       \[
+       a_n = (a_{n-1} + b_{n-1}) \times (k - 1) = S(n-1) \times (k - 1)
+       \]
+   \end{itemize}
+
+2. 对于 \( b_n \)：
+   \begin{itemize}
+       \item 来源：长度为 \( n-1 \) 的字符串，最后两个字母不相同，然后添加一个与前一个字母 \textbf{相同} 的字母（形成最后两个字母相同，但不至于 3 连同）。
+       \[
+       \text{方案数为: } a_{n-1} \times 1
+       \]
+       \item 总计：
+       \[
+       b_n = a_{n-1}
+       \]
+   \end{itemize}
+
+初始条件:
+
+\begin{itemize}
+    \item 当 \( n = 1 \) 时：
+    \[
+    a_1 = k \quad \text{（长度为 1，无连续相同字母的可能）}, \quad b_1 = 0 \quad \text{（无法有连续相同字母）}.
+    \]
+    \item 当 \( n = 2 \) 时：
+    \[
+    a_2 = k \times (k - 1)
+    \]
+    \[
+    b_2 =  k
+    \]
+\end{itemize}
+
+根据上述定义，设总方案数 为\( S(n) \) 等于：
+\[
+S(n) = a_n + b_n
+\]
+
+又,
+\[
+       b_n = a_{n-1}
+       \]
+       
+于是：
+\[
+S(n) = a_n + a_{n-1}
+\]
+
+将 \(a_n\) 的表达式代入：
+\[
+\begin{aligned}
+S(n) &= a_n + a_{n-1} \\
+&= \left[(a_{n-1} + a_{n-2}) \times (k-1)\right] + a_{n-1} \\
+&= a_{n-1} \times (k-1) + a_{n-2} \times (k-1) + a_{n-1} \\
+&= a_{n-1} \times (k-1+1) + a_{n-2} \times (k-1) \\
+&= a_{n-1} \times k + a_{n-2} \times (k-1).
+\end{aligned}
+\]
+
+由于 \(a_{n-1} = S(n-1) - a_{n-2}\)，所以：
+\[
+\begin{aligned}
+S(n) &= \left[S(n-1) - a_{n-2}\right] \times k + a_{n-2} \times (k-1) \\
+&= S(n-1) \times k - a_{n-2} \times k + a_{n-2} \times (k-1).
+\end{aligned}
+\]
+
+展开并简化：
+\[
+\begin{aligned}
+S(n) &= S(n-1) \times k - a_{n-2} \\
+&= S(n-1) \times (k-1) + S(n-1) - a_{n-2} \\
+&= S(n-1) \times (k-1) + a_{n-1}
+\end{aligned}
+\]
+
+又\(a_{n-1} = (k-1) \times (a_{n-2} + b_{n-2})\)，所以：
+\[
+\begin{aligned}
+S(n) &= S(n-1) \times (k-1) + S(n-2) \times (k-1)\\
+\end{aligned}
+\]
+
+于是得到递推关系：
+\[
+S(n) = (k-1) \left[S(n-1) + S(n-2)\right].
+\]
+
+因此我们有特征方程：
+\[
+r^2 - (k-1)r - (k-1) = 0
+\]
+其中：
+
+1. 特征根 \(r_1\) 和 \(r_2\)：
+\[
+r_1 = \frac{(k-1) + \Delta}{2}, \quad r_2 = \frac{(k-1) - \Delta}{2}
+\]
+\[
+\Delta = \sqrt{(k-1)(k+3)}
+\]
+
+因此有,
+\[
+S(n) = C_1 r_1^n + C_2 r_2^n
+\]
+
+2. 联立初始条件得到的方程组求解系数 \(C_1\) 和 \(C_2\)：
+
+当 \(n = 1\) 时：
+\[
+S(1) = C_1 r_1 + C_2 r_2 = k
+\]
+
+当 \(n = 2\) 时：
+\[
+S(2) = C_1 r_1^2 + C_2 r_2^2 = k^2
+\]
+\[
+C_1 = \frac{k(k-1 + \Delta)}{2(k-1)\Delta}, \quad C_2 = \frac{-k(k-1 - \Delta)}{2(k-1)\Delta}
+\]
+
+代入至表达式中, 最终得到：
+\[
+\boxed{S(n) = \frac{k(k-1+\Delta)}{2(k-1)\Delta} \left(\frac{(k-1) + \Delta}{2}\right)^n + \frac{-k(k-1-\Delta)}{2(k-1)\Delta} \left(\frac{(k-1) - \Delta}{2}\right)^n 
+\boxed{\Delta = \sqrt{(k-1)(k+3)}}
+}
+\]
+
+\section*{4.8}
+\textbf{解答:}
+
+
+首先，$S_n$ 的一次差分为：
+\[
+\Delta S_n = S_n - S_{n-1} = n^4
+\]
+
+由于 $n^4$ 是四次多项式，根据差分理论，其第五阶差分为零。因此，$S_n$ 满足六阶线性齐次差分方程：
+\[
+S_n - 6S_{n-1} + 15S_{n-2} - 20S_{n-3} + 15S_{n-4} - 6S_{n-5} + S_{n-6} = 0
+\]
+
+
+对应的特征方程为：
+\[
+r^6 - 6r^5 + 15r^4 - 20r^3 + 15r^2 - 6r + 1 = 0
+\]
+特征根为 $r = 1$，重数为 6。
+
+为了方便求解, 将$S_n$ 的通解形式设为：
+\[
+S_n = A_0 +  A_1\binom{n}{1} +  A_2 \binom{n}{2} +  A_3 \binom{n}{3} +  A_4 \binom{n}{4} +  A_5 \binom{n}{5}
+\]
+
+
+有初始条件：
+\begin{align*}
+S_0 &= 0 \\
+S_1 &= 1 \\
+S_2 &= 17 \\
+S_3 &= 98 \\
+S_4 &= 354 \\
+S_5 &= 979
+\end{align*}
+
+将这些值代入通解，建立方程组, 解得：
+\[
+\begin{cases}
+A_0 = 0, \\
+A_1 = 1, \\
+A_2 = 15, \\
+A_3 = 50, \\
+A_4 = 60, \\
+A_5 = 24.
+\end{cases}
+\]
+
+最终求得, 四次方和的表达式为：
+\[
+\boxed{\sum_{k=1}^n k^4 = \binom{n}{1} + 15 \binom{n}{2} + 50 \binom{n}{3} + 60 \binom{n}{4} + 24 \binom{n}{5}}
+\]
+\section*{4.9}
+\textbf{解答:}
+\section*{(1) $f(n, k)$ 满足的一个线性常系数递推关系}
+考虑第 $n$ 个位置是否被选取，分为以下两种情况：
+
+\begin{enumerate}
+    \item \textbf{第 $n$ 个数未被选取}：此时，需要从前 $n-1$ 个数中选取 $k$ 个不相邻的数，方案数为 $f(n-1, k)$；
+    \item \textbf{第 $n$ 个数被选取}：由于相邻数不能被同时选取，因此第 $n-1$ 个数不能被选取。此时，需要从前 $n-2$ 个数中选取 $k-1$ 个不相邻的数，方案数为 $f(n-2, k-1)$。
+\end{enumerate}
+
+因此，$f(n, k)$ 满足递推关系：
+\[
+\boxed{f(n, k) = f(n-1, k) + f(n-2, k-1)}
+\]
+
+\section*{(2) $f(n, k)$ 的通项公式}
+
+通过观察递推关系并分析小规模情况，猜测通项公式为：
+\[
+f(n, k) = \binom{n-k+1}{k}
+\]
+
+\subsection*{数学归纳法证明}
+
+\paragraph{1. 基础情况：}
+\begin{itemize}
+    \item 当 $k = 0$ 时，$f(n, 0) = \binom{n - 0 + 1}{0} = \binom{n+1}{0} = 1$，显然成立；
+    \item 当 $n = k$ 时，若 $n = k = 1$：
+    \[
+    f(1, 1) = \binom{1 - 1 + 1}{1} = \binom{1}{1} = 1
+    \]
+    同样成立。
+\end{itemize}
+
+\paragraph{2. 归纳假设：}
+假设对于小于 $n$ 的所有整数，公式成立，即：
+\[
+f(n-1, k) = \binom{n-k}{k}, \quad f(n-2, k-1) = \binom{n-k-1}{k-1}
+\]
+
+\paragraph{3. 归纳推导：}
+根据递推关系：
+\[
+f(n, k) = f(n-1, k) + f(n-2, k-1)
+\]
+代入归纳假设：
+\[
+f(n, k) = \binom{n-k}{k} + \binom{n-k-1}{k-1}
+\]
+利用组合数的性质（帕斯卡恒等式）：
+\[
+\binom{n-k}{k} + \binom{n-k-1}{k-1} = \binom{n-k+1}{k}
+\]
+因此：
+\[
+f(n, k) = \binom{n-k+1}{k}
+\]
+
+\paragraph{结论：}
+\[
+\boxed{f(n, k) = \binom{n-k+1}{k}}
+\]
+
+\section*{(3) 利用$f(n, k)$ 求$g(n, k)$}
+\subsection*{分析}
+
+\begin{enumerate}
+    \item \textbf{当 1 和 $n$ 同时被选取时}：
+    
+    \begin{itemize}
+        \item 1 和 $n$ 被选中后，数 2 和 $n-1$ 不能被选取；
+        \item 剩余可选的数是从 3 到 $n-2$ 的 $n-4$ 个数中选择 $k-2$ 个不相邻的数；
+        \item 方案数为 $f(n-4, k-2)$。
+    \end{itemize}
+    
+    \item \textbf{总方案数}：
+    
+    \[
+    g(n, k) = f(n, k) - f(n-4, k-2)
+    \]
+\end{enumerate}
+
+---
+
+\subsection*{递推关系和公式}
+
+由 $f(n, k) = \binom{n-k+1}{k}$，可以写出：
+\[
+g(n, k) = \binom{n-k+1}{k} - \binom{(n-4)-(k-2)+1}{k-2}
+\]
+
+化简后最终得到：
+\[
+\boxed{g(n, k) = \binom{n-k+1}{k} - \binom{n-k-1}{k-2}}
+\]
+
+
+
+\section*{4.10}
+\textbf{解答:}
+\section*{(1) 所有可能的铺砖方案数}
+
+设 $T(n)$ 表示长度为 $n$ 的路径的所有铺砖方案数。
+
+\begin{enumerate}
+    \item **当铺设长度为 1 的砖块（类型 A 或类型 B）时：**
+    \begin{itemize}
+        \item 每次可以选择铺设类型 A 或类型 B 的砖块；
+        \item 剩余的长度为 $n-1$ 的路径可以有 $T(n-1)$ 种铺法；
+        \item 方案数贡献：$2 \times T(n-1)$。
+    \end{itemize}
+    \item **当铺设长度为 2 的砖块（类型 C）时：**
+    \begin{itemize}
+        \item 只能铺设一种类型的砖块（类型 C）；
+        \item 剩余的长度为 $n-2$ 的路径可以有 $T(n-2)$ 种铺法；
+        \item 方案数贡献：$1 \times T(n-2)$。
+    \end{itemize}
+\end{enumerate}
+
+\textbf{递推关系：}
+\[
+T(n) = 2 \times T(n-1) + T(n-2)
+\]
+
+\subsection*{初始条件}
+\[
+T(0) = 1, \quad T(1) = 2
+\]
+
+特征方程：
+\[
+\quad r^2 - 2r - 1 = 0
+\]
+
+特征根：
+\[
+r = 1 + \sqrt{2}, \quad r = 1 - \sqrt{2}.
+\]
+
+通解：
+\[
+T(n) = A (1 + \sqrt{2})^n + B (1 - \sqrt{2})^n
+\]
+
+利用初始条件：
+\begin{align*}
+T(0) &= A + B = 1, \\
+T(1) &= A (1 + \sqrt{2}) + B (1 - \sqrt{2}) = 2.
+\end{align*}
+
+解得：
+\[
+A = \frac{1 + \sqrt{2}}{2 \sqrt{2}}, \quad B = \frac{1 - \sqrt{2}}{-2 \sqrt{2}}.
+\]
+
+通项公式：
+\[
+\boxed{T(n) = \frac{(1 + \sqrt{2})^{n+1} + (1 - \sqrt{2})^{n+1}}{2 \sqrt{2}}}
+\]
+
+\section*{(2) 所有方案中使用的砖数总和}
+
+\begin{itemize}
+    \item 情况 1（类型 A）：每个方案增加 1 块砖；
+    \item 情况 2（两个类型 B）：每个方案增加 2 块砖；
+    \item 情况 3（类型 C + 两个类型 B）：每个方案增加 3 块砖。
+\end{itemize}
+
+---
+
+\subsection*{递推关系}
+
+从长度为 $n-1$ 的方案延伸：
+\begin{itemize}
+    \item 类型 A 增加的总砖数：$S(n-1) + T(n-1) \times 1$；
+    \item 两个类型 B 增加的总砖数：$S(n-1) + T(n-1) \times 2$。
+\end{itemize}
+
+从长度为 $n-2$ 的方案延伸：
+\begin{itemize}
+    \item 类型 C + 两个类型 B 增加的总砖数：$S(n-2) + T(n-2) \times 3$。
+\end{itemize}
+
+因此，总的砖数为：
+\[
+S(n) = [S(n-1) + T(n-1) \times 1] + [S(n-1) + T(n-1) \times 2] + [S(n-2) + T(n-2) \times 3]
+\]
+
+得到递推关系：
+\[
+\boxed{S(n) = 2S(n-1) + S(n-2) + 3T(n-1) + 3T(n-2)}
+\]
+
+
+
+\end{document}
+
+
+

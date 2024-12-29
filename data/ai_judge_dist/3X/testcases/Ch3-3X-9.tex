@@ -1,0 +1,113 @@
+% MIT License
+
+% Copyright (c) 2022 Chiyuru
+
+% Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+% to deal in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+
+% The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amsmath}
+\usepackage{cases}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\geometry{a4paper}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+
+\title{组合数学第三次作业}
+\author{***}
+\date{\today}
+\pagenumbering{arabic}
+
+\begin{document}
+
+% \fancyhead[L]{驰雨Chiyuru}
+\fancyhead[C]{The name of the experiment}
+\fancyfoot[C]{\thepage}
+
+\maketitle
+% \tableofcontents
+
+\section{第三章习题（基本和进阶）}
+
+\subsection{}
+
+设 $a_{n}= n^{3},(n >= 0)$，求数列 $\{a_{n}\}$ 的母函数，化简至封闭形式．
+
+$\{a_{n}\}$的母函数为$S_{x}=\sum_{n=0}^{+\infty}{n^{3}x^{n}}$。
+
+已知$\sum_{n=0}^{+\infty}{x^{n}}=\frac{1}{1-x}$，此式子对两边求导：$\sum_{n=0}^{+\infty}{nx^{n-1}}=\frac{1}{(1-x)^{2}}$。
+
+两边乘以x，有$\sum_{n=0}^{+\infty}{nx^{n}}=\frac{x}{(1-x)^{2}}$，再两边求导，有$\sum_{n=0}^{+\infty}{n^{2}x^{n-1}}=\frac{x+1}{(1-x)^{3}}$。
+
+两边乘以x，有$\sum_{n=0}^{+\infty}{n^{2}x^{n}}=\frac{x^{2}+x}{(1-x)^{3}}$，再两边求导，有$\sum_{n=0}^{+\infty}{n^{3}x^{n-1}}=\frac{x^{2}+4x+1}{(1-x)^{4}}$。
+
+再两边乘以x，得到$\sum_{n=0}^{+\infty}{n^{3}x^{n}}=\frac{x^{3}+4x^{2}+x}{(1-x)^{4}}$。
+
+即$S_{x}=\frac{x^{3}+4x^{2}+x}{(1-x)^{4}}$。
+
+\subsection{}
+设 $a_{n}= \binom{n+3}{3},(n >= 0)$，求数列 $\{a_{n}\}$ 的母函数，化简至封闭形式．
+
+$\{a_{n}\}$的母函数为$S_{x}=\sum_{n=0}^{+\infty}{\frac{(n+3)(n+2)(n+1)}{6}x^{n}}$。
+
+已知$\sum_{n=0}^{+\infty}{x^{n}}=\frac{1}{1-x}$，对此式子两边乘以$x^{3}$，有$\sum_{n=0}^{+\infty}{x^{n+3}}=\frac{x^{3}}{1-x}$。
+
+两边求导，有$\sum_{n=0}^{+\infty}{(n+3)x^{n+2}}=\frac{3x^{2}-2x^{3}}{(1-x)^{2}}$。
+
+再两边求导，有$\sum_{n=0}^{+\infty}{(n+3)(n+2)x^{n+1}}=\frac{2x(x^{2}-3x+3)}{(1-x)^{3}}$。
+
+再两边求导，有$\sum_{n=0}^{+\infty}{(n+3)(n+2)(n+1)x^{n}}=\frac{6}{(1-x)^{4}}$。
+
+对比上式和母函数，可得$S_{x}=\frac{1}{(1-x)^{4}}$。
+
+\subsection{}
+
+设 $a_{n}= \sum_{k=1}^{n+1}{k^{3}},(n >= 0)$，根据习题1求数列 $\{a_{n}\}$ 的母函数，化简至封闭形式．
+
+$\{a_{n}\}$的母函数为$S_{x}=1+(1^{3}+2^{3})x^{1}+(1^{3}+2^{3}+3^{3})x^{2}...$。
+
+对等式两边同时乘以x，得到
+$xS_{x}=1^{3}x+(1^{3}+2^{3})x^{2}+(1^{3}+2^{3}+3^{3})x^{3}...$。
+
+上下两式相减，看出$(1-x)S_{x}=1+2^{3}x^{1}+3^{3}x^{2}+4^{3}x^{3}...=\sum_{n=0}^{+\infty}{n^{3}x^{n-1}}=\frac{x^{2}+4x+1}{(1-x)^{4}}$。
+
+即有$S_{x}=\frac{x^{2}+4x+1}{(1-x)^{5}}$。
+
+
+\subsection{}
+
+数列 $\{a_{n}\}$ 的母函数为$\frac{4-3x}{(1-x)(1+x-x^{3})}$，定义$b_{0}=a_{0},b_{1}=a_{1}-a_{0},b_{n}=a_{n}-a_{n-1}$，求$\{b_{n}\}$的母函数。
+
+
+设$A_{x}=\frac{4-3x}{(1-x)(1+x-x^{3})}$,
+
+$A_{x}=a_{0}+a_{1}x+a_{2}x^{2}+a_{3}x^{3}...$
+
+$B_{x}=a_{0}+(a_{1}-a_{0})x+(a_{2}-a_{1})x^{2}+(a_{3}-a_{2})x^{3}....$
+
+$B_{x}+xA_{x}=a_{0}+a_{1}x+a_{2}x^{2}+....=A_{x}$
+
+$B_{x}=A_{x}(1-x)=\frac{4-3x}{(1+x-x^{3})}$
+
+\subsection{}
+
+$\{a_{n}\}$的母函数为$S_{x}=\sum_{n=0}^{+\infty}C(n+k,k)x^{n}}$。
+
+已知$\sum_{n=0}^{+\infty}{x^{n}}=\frac{1}{1-x}$，对式子的两边同时取组合数有
+
+\end{document}

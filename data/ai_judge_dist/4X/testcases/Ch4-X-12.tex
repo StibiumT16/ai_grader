@@ -1,0 +1,249 @@
+% Homework template for Inference and Information
+% UPDATE: September 26, 2017 by Xiangxiang
+\documentclass[a4paper]{article}
+\usepackage{ctex}
+\ctexset{
+proofname = \heiti{证明}
+}
+\usepackage{amsmath, amssymb, amsthm}
+% amsmath: equation*, amssymb: mathbb, amsthm: proof
+\usepackage{moreenum}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs} % toprule
+\usepackage[mathcal]{eucal}
+\usepackage[thehwcnt = 4]{iidef}
+
+\thecourseinstitute{清华大学}
+\thecoursename{组合数学}
+\theterm{2024年秋季学期}
+\hwname{CH4 基础}
+\slname{\heiti{解}}
+
+
+\begin{document}
+\courseheader
+\name{}
+
+\begin{enumerate}[]
+  \setlength{\itemsep}{3\parskip}
+  
+\item
+\begin{solution}
+    1) \begin{align*}
+        G_n-3G_{n-1}+G_{n-2}&=F_{2n}-3F_{2n-2}+F_{2n-4}= F_{2n-1} -2(F_{2n-3}+F_{2n-4}) +F_{2n-4} \\
+        &= F_{2n-1} -2F_{2n-3} -F_{2n-4} = F_{2n-2} - F_{2n-3} - F_{2n-4} = 0 \\
+    \end{align*}
+
+    2) 特征方程为 $C(m) = m^2-3m+1 =0$，解得$m_1=\frac{3+\sqrt{5}}{2},m2=\frac{3-\sqrt{5}}{2}$，所以
+    \begin{equation*}
+        G(x) = \frac{A}{1-m_1x} + \frac{B}{1-m_2x}
+    \end{equation*}
+    结合$G_0=F_0=0,G_1=F_2=1$，可解得$A=\frac{\sqrt{5}}{5},B=-\frac{\sqrt{5}}{5}$，所以
+    \begin{equation*}
+        G(x)=\frac{\frac{\sqrt{5}}{5}}{1-\frac{3+\sqrt{5}}{2}x} -  \frac{\frac{\sqrt{5}}{5}}{1-\frac{3-\sqrt{5}}{2}x}
+    \end{equation*}
+\end{solution}
+
+
+\item
+\begin{solution}
+\begin{equation*}
+    G(x)=\frac{1}{1-x+x^2}
+\end{equation*}
+所以可得特征多项式为 $C(m)=m^2-m+1$，所以递推关系为 $a_n-a_{n-1}+a_{n-2}=0$。根据长除法，可得$a_0=1,a_1=1$
+\end{solution}
+
+
+\item 
+\begin{solution}
+    可以知道其特征方程的解为3和-1，于是构造特征方程
+    \begin{equation*}
+        C(m)=(m-3)(m+1)= m^2-2m-3
+    \end{equation*}
+    所以可得线性常系数递推关系为 $a_n-2a_{n-1}-3a_{n-2}=0$
+\end{solution}
+
+\item 
+\begin{solution}
+    差分可得
+    $a_n-3a_{n-1}+3a_{n-2}-a_{n-3}=0$。
+    特征方程$C(m)=m^3-3m^2+3m-1=(m-1)^3=0$，所以$a_n=An^2+Bn+C$，带入$a_0=1,a_2=2,a_3=8$，可得$A=\frac{5}{2},B=-\frac{3}{2},C=1$，所以
+    \begin{equation*}
+        a_n=\frac{5}{2}n^2-\frac{3}{2}n+1
+    \end{equation*}
+\end{solution}
+
+\item 
+\begin{solution}
+    令$f_n$表示长度为n的不包含AB的串个数，$g_n$表示长度为n不包含AB，且不以A结尾的串个数。考虑最后一位如果不是B，那么前面n位只要不出现AB即可。如果最后一位是B，那么要求倒数第二位不是A，也就是$g_{n-1}$，所以得到
+    \begin{equation*}
+        f_n= 3 f_{n-1} + g_{n-1}
+    \end{equation*}
+    另外对于$g_n$，如果最后一位不是B，则前面n-1位不出现AB即可；如果最后一位是B，那么倒数第二位不能是A，所以得到
+    \begin{equation*}
+        g_n = 2 f_{n-1} + g_{n-1}
+    \end{equation*}
+    联立方程可以消去g，得到
+    \begin{equation*}
+        f_n -4 f_{n-1} +f_{n-2} = 0
+    \end{equation*}
+    $f_1=4,f_2=15,f_0=1$
+    特征方程 $C(m) = m^2 -4m+1 =0$ 解得$m_1 = 2+\sqrt{3},m_2 = 2-\sqrt{3}$，
+    所以$f_n = A (2+\sqrt{3})^n + B(2-\sqrt{3})^n$，带入$f_0,f_1$可得
+    \begin{equation*}
+        f_n = \frac{\sqrt{3}}{6} ((2+\sqrt{3})^{n+1} - (2-\sqrt{3})^{n+1}) 
+    \end{equation*}
+    所以最后答案为
+    \begin{equation*}
+        a_n = 4^n - f_n = 4^n - \frac{\sqrt{3}}{6} ((2+\sqrt{3})^{n+1} - (2-\sqrt{3})^{n+1}) 
+    \end{equation*}
+\end{solution}
+
+\item 
+\begin{solution}
+    令$a_n$表示新规则下的最小移动次数，$b_n$表示将n个盘移动到另一根柱子的最小移动次数，也就是原始汉诺塔的定义，所以$b_n=2^n-1$。考虑要想完成新规则下的移动，可以分为以下几个步骤，假设n为偶数：
+    \begin{enumerate}
+        \item 将n-1个盘先移动到C柱上，代价为$b_{n-1}$
+        \item 将A柱上剩下的第n个盘移动到B柱上，代价为1
+        \item 将C柱上的n-3个盘移动到A柱上，代价为 $b_{n-3}$
+        \item 将C柱上第n-2个盘移动到B柱上，代价为1
+    \end{enumerate}
+    这时问题变成一个子问题，C柱上有第n-1个盘，B柱上有n和n-2号盘，移动A柱上剩下的n-3个盘需要$a_{n-3}$的代价即可完成。同时n为奇数时只需要将B，C柱调换即可，结果是一样的，所以得到递推式
+    \begin{equation*}
+        a_n = a_{n-3} + 2^{n-1} + 2^{n-3} = a_{n-3} + 5 \cdot 2^{n-3}
+    \end{equation*}
+    $a_1=1,a_2=2,a_3=5 $，可得$a_0=0$，特征方程 $C(m)=m^3-1=0$，解得$m_1=1,m_2=\frac{-1-i\sqrt{3}}{2},m_3=\frac{-1+i\sqrt{3}}{2}$
+    特解的形式为$D\cdot 2^n $，带入递推式解得$D=\frac{5}{7}$，所以解的形式为$a_n = A+Bcos \frac{2}{3} n \pi + C sin \frac{2}{3} n \pi + \frac{5}{7} 2^n$，带入$a_0,a_1,a_2$解得
+    \begin{equation*}
+        a_n = -\frac{2}{3} -\frac{1}{21} cos \frac{2}{3} n \pi + \frac{\sqrt{3}}{7} sin \frac{2}{3} n \pi + \frac{5}{7} 2^n
+    \end{equation*}
+\end{solution}
+
+\item 
+\begin{solution}
+    令$a_n$表示长度为n且满足条件的字符串中末尾两个字符不同的个数，$b_n$表示长度为n且满足条件的字符串中末尾两个字符相同的个数，那么有递推关系
+    \begin{align*}
+        a_n &= (a_{n-1}+b_{n-1}) * (k-1) \\
+        b_n &= a_{n-1} \\
+    \end{align*}
+    消去b可得, 
+    \begin{equation*}
+        a_n = (a_{n-1} + a_{n-2}) * (k-1)
+    \end{equation*}
+    所以特征方程为
+    \begin{equation*}
+        C(m) = m^2-(k-1)m-(k-1) = 0
+    \end{equation*}
+    解为$m_1 = \frac{k-1+\sqrt{(k-1)^2+4(k-1)}}{2}, m_2 = \frac{k-1-\sqrt{(k-1)^2+4(k-1)}}{2}$
+    代入$a_1=k,a_2=k(k-1)$，得$a_0=0$，所以得到通项公式为
+    \begin{equation*}
+        a_n = \frac{k}{\sqrt{k^2+2k-3}} [ (\frac{k-1+\sqrt{k^2+2k-3}}{2}) ^ n - (\frac{k-1-\sqrt{k^2+2k-3}}{2}) ^n ]
+    \end{equation*}
+    注意到原问题答案$f_n=a_n+b_n$，可得$f_n = a_{n+1}/(k-1)$，所以答案为
+    \begin{equation*}
+        f_n = \frac{k}{(k-1)\sqrt{k^2+2k-3}} [ (\frac{k-1+\sqrt{k^2+2k-3}}{2}) ^ {n+1} - (\frac{k-1-\sqrt{k^2+2k-3}}{2}) ^{n+1} ]
+    \end{equation*}
+    
+\end{solution}
+
+\item 
+\begin{solution}
+    令$S_n= \sum _{k=1} ^ {n} k^4$ ,可以得到其递推关系式为
+    \begin{equation*}
+        S_{n} - 6S_{n-1} + 15S_{n-2} - 20S_{n-3} + 15S_{n-4} - 6S_{n-5} + S_{n-6} = 0
+    \end{equation*}
+    其特征方程为$C(m) = (m-1)^6 = 0$
+    因为$S_0=0$，不妨设
+    \begin{equation*}
+        S_n = A_1 \binom{n}{1} + A_2 \binom{n}{2} + A_3 \binom{n}{3} + A_4 \binom{n}{4} + A_5 \binom{n}{5}
+    \end{equation*}
+    带入$S_1 = 1$，得 $A_1 = 1$; 带入$S_2 = 17$，得 $A_2 = 15$; 带入$S_3 = 98$，得 $A_3 = 50$; 带入$S_4 = 354$，得 $A_4 = 60$; 
+    带入$S_5 = 979$，得 $A_5 = 24$，所以可得
+    \begin{equation*}
+        S_n = \binom{n}{1} + 15 \binom{n}{2} + 50 \binom{n}{3} + 60 \binom{n}{4} + 24 \binom{n}{5}
+    \end{equation*}
+\end{solution}
+
+\item 
+\begin{solution}
+    1) 根据第n个数选不选，可以进行分类。如果选第n个数，那么就需要从n-2个数中选k-1个数，如果不选那么需要从n-1个数中选k个数，所以得到递推关系为
+    \begin{equation*}
+        f(n,k)=f(n-1,k)+f(n-2,k-1)
+    \end{equation*}
+    对于初始值，f(i,0)=1，f(i,1)=i
+
+    2) $f(n,k) = \binom{n-k+1}{k}$，下面用数学归纳法证明：
+    首先对于边界条件，当$k=0，f(n,0)=1$成立；当$k=1,f(n,1)=n$成立。
+
+    假设当i<n,j<k时，有$f(i,j) = \binom{i-j+1}{j}$成立，则根据递推关系可得
+    \begin{align*}
+        f(n,k) &= f(n-1,k)+f(n-2,k-1) = \binom{n-k}{k} + \binom{n-k}{k-1} \\
+        &= \binom{n-k+1}{k} \\
+    \end{align*}
+    所以原式得证。
+
+    3) 考虑1，n这两个元素会不会出现在最终的选择，第一种情况两个都不选，那么结果为$f(n-2,k)$。另一种情况是选择1或者n，这两个选择对答案的贡献是一样的，假设选了1那么n和2都不能选，那么这种情况的总贡献为$2f(n-3,k-1)$，所以可得
+    \begin{align*}
+        g(n,k) &= f(n-2,k) + 2f(n-3,k-1) = f(n-1,k) + f(n-3,k-1) \\
+        &= \binom{n-k}{k} + \binom{n-k-1}{k-1}  \\
+    \end{align*}
+\end{solution}
+
+\item 
+\begin{solution}
+    1) 首先我们认为对于一块砖有三种不同的铺法，分别是用1*1的方砖，根据对角线的方向，用三角形的砖有两种方法。如果不考虑斜边为2的大三角形，那么每块砖其实是独立的。令$f_n$表示铺设1*n的地方案数，将大三角形考虑进去，可以发现大三角形可以连续占据至少2块地砖，且根据方向不同，存在两种不同的放置方法。那么对于第n格，考虑它前面一次放置的是大三角形还是其他的地砖分类讨论，可以得到递推关系：
+    \begin{equation*}
+        f_n = 2 \sum_{i=0} ^ {n-2} f_i + 3f_{n-1}
+    \end{equation*}
+    第一项是考虑大三角形地砖延续到哪，最远是从头开始都用大三角形来填。第二项则是用三种方法填第n块砖，不用大三角形。为了求解f，令$F_n=\sum_{i=1}^n f_n$，得到递推式
+    \begin{equation*}
+        F_n -4F{n-1} + F_{n-2} = 0
+    \end{equation*}
+    特征方程$C(m)=m^2-4m+1=0$，解得$m_1=2+\sqrt{3},m_2=2-\sqrt{3}$
+    根据$F_1=4,F_2=15,F_0=1$，得到$F_n$表达式为
+    \begin{equation*}
+        F_n = \frac{1}{2\sqrt{3}} [ (2+\sqrt{3})^{n+1} - (2-\sqrt{3})^{n+1}]
+    \end{equation*}
+    所以 
+    \begin{equation*}
+        f_n = F_n-F_{n-1}=\frac{1}{2\sqrt{3}} [ (\sqrt{3}+1)(2+\sqrt{3})^{n} + (\sqrt{3}-1)(2-\sqrt{3})^{n}]
+    \end{equation*}
+
+    2) 需要考虑每种砖对于答案的贡献
+    \begin{enumerate}
+        \item 1*1的方砖：假设第i格用方砖，那么它出现在$f_{i-1} * f_{n-i}$种方案中，对答案的总贡献为$S_1 =\sum_{i=1}^{n} f_{i-1} * f_{n-i}$
+        \item 小三角形：如果在第i格放置了一个小三角形，考虑到直角的位置，总共有四种小三角形，但是其共同的特点是放置完小三角形，必然有一边是填满的，另一边是一个缺口，可以放置小三角形或者大三角形。考虑一定会连续放置若干个大三角形后放置一个小三角形来填满，那么这个小三角形（可以在左边放大三角形）对答案的贡献为$\sum_{j=0}^{i-1} f_j*f_{n-i}$。对于可以在右边放大三角形的方案为$\sum_{j=i}^{n} f_{n-j}*f_{i-1}$，所以小三角形总的贡献为
+        \begin{equation*}
+            S_2 = 2 \sum_{i=1} ^ n (\sum_{j=0}^{i-1} f_j*f_{n-i} + \sum_{j=i}^{n} f_{n-j}*f_{i-1})
+        \end{equation*}
+
+        \item 大三角形：对于第i格和i-1格放置大三角形，其两边都没有填满，所以可以向两边扩展，其贡献为$\sum_{j=0} ^ {i-2} \sum_{k=i}^n f_j * f_{n-k}$，所以总贡献为
+        \begin{equation*}
+            S_3 = \sum_{i=1} ^ n \sum_{j=0} ^ {i-2} \sum_{k=i}^n f_j * f_{n-k}
+        \end{equation*}
+    \end{enumerate}
+    所以总砖数为
+    \begin{equation*}
+        S = \sum_{i=1}^{n} ( f_{i-1} * f_{n-i} + 2(\sum_{j=0}^{i-1} f_j*f_{n-i} + \sum_{j=i}^{n} f_{n-j}*f_{i-1}) + \sum_{j=0} ^ {i-2} \sum_{k=i}^n f_j * f_{n-k})
+    \end{equation*}
+    其中
+    \begin{equation*}
+        f_n =\frac{1}{2\sqrt{3}} [ (\sqrt{3}+1)(2+\sqrt{3})^{n} + (\sqrt{3}-1)(2-\sqrt{3})^{n}]
+    \end{equation*}
+    
+\end{solution}
+
+\end{enumerate}
+\end{document}
+\begin{equation}
+\end{equation}
+
+%%% Local Variables:
+%%% mode: late\rvx
+%%% TeX-master: t
+%%% End:

@@ -1,7 +1,7 @@
 # LLM/llm.py:
 from abc import ABC, abstractmethod
-import requests
-from transformers import AutoModelForCausalLM, AutoTokenizer
+#import requests
+#from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
 class LLM(ABC):

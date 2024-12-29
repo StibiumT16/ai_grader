@@ -1,0 +1,301 @@
+%
+% This is a borrowed LaTeX template file for lecture notes for CS267,
+% Applications of Parallel Computing, UCBerkeley EECS Department.
+% Now being used for CMU's 10725 Fall 2012 Optimization course
+% taught by Geoff Gordon and Ryan Tibshirani.  When preparing
+% LaTeX notes for this class, please use this template.
+%
+% To familiarize yourself with this template, the body contains
+% some examples of its use.  Look them over.  Then you can
+% run LaTeX on this file.  After you have LaTeXed this file then
+% you can look over the result either by printing it out with
+% dvips or using xdvi. "pdflatex template.tex" should also work.
+%
+
+\documentclass[UTF8,oneside]{article}
+
+\usepackage[UTF8,scheme=plain]{ctex}
+% \usepackage[AutoFakeBold,AutoFakeSlant]{xeCJK}  % 载入 xeCJK以支持中文，支持伪粗体，伪斜体
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{float, bm}
+
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{-0.25 in}
+\setlength{\topmargin}{-0.6 in}
+\setlength{\textwidth}{6.5 in}
+\setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.75 in}
+\setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+%
+% ADD PACKAGES here:
+%
+
+\usepackage{amsmath,amsfonts,graphicx}
+\usepackage{etoolbox}
+\AtBeginEnvironment{proof}{\normalsize}
+
+%
+% The following commands set up the lecnum (lecture number)
+% counter and make various numbering schemes work relative
+% to the lecture number.
+%
+
+%
+% The following macro is used to generate the header.
+%
+\newcommand{\lecture}[4]{
+   \pagestyle{myheadings}
+   \thispagestyle{plain}
+   \newpage
+   \setcounter{page}{1}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{\vspace{2mm}
+    \hbox to 6.28in { {\bf Combination Math
+	\hfill 2024 Fall} }
+       \vspace{4mm}
+       \hbox to 6.28in { {\Large \hfill HW #1  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.28in { {\it Student: #2 \hfill Time: #3} }
+      \vspace{2mm}}
+   }
+   \end{center}
+   \markboth{Lecture #1: #2}{Lecture #1: #2}
+
+}
+%
+% Convention for citations is authors' initials followed by the year.
+% For example, to cite a paper by Leighton and Maggs you would type
+% \cite{LM89}, and to cite a paper by Strassen you would type \cite{S69}.
+% (To avoid bibliography problems, for now we redefine the \cite command.)
+% Also commands that create a suitable format for the reference list.
+\renewcommand{\cite}[1]{[#1]}
+\def\beginrefs{\begin{list}%
+        {[\arabic{equation}]}{\usecounter{equation}
+         \setlength{\leftmargin}{2.0truecm}\setlength{\labelsep}{0.4truecm}%
+         \setlength{\labelwidth}{1.6truecm}}}
+\def\endrefs{\end{list}}
+\def\bibentry#1{\item[\hbox{[#1]}]}
+
+
+\begin{document}
+%FILL IN THE RIGHT INFO.
+%\lecture{**LECTURE-NUMBER**}{**DATE**}{**LECTURER**}{**SCRIBE**}
+\lecture{4}{}{Oct. 31}
+%\footnotetext{These notes are partially based on those of Nigel Mansell.}
+
+% **** YOUR NOTES GO HERE:
+
+% Some general latex examples and examples making use of the
+% macros follow.
+%**** IN GENERAL, BE BRIEF. LONG SCRIBE NOTES, NO MATTER HOW WELL WRITTEN,
+%**** ARE NEVER READ BY ANYBODY.
+
+\fontsize{12pt}{24pt}
+
+\section{4.1}
+
+\subsection{(1)}
+
+\begin{align*}
+    G_n - 3G_{n-1}+G_{n-2} &= F_{2n} - 3F_{2n-2} + F_{2n-4}\\
+    &= F_{2n-1} + F_{2n-2} - 3F_{2n-2} + F_{2n-4} \\
+    &= 2F_{2n-2} + F_{2n-3} - 3F_{2n-2} + F_{2n-4} \\
+    &= F_{2n-3} + F_{2n-4} - F_{2n-2} \\
+    &= 0
+\end{align*}
+
+\subsection{(2)}
+
+设母函数为$G(x)$, 根据递推关系有:
+\[
+    G(x) -3xG(x) + x^2G(x) = G_0 + (G_1 - 3G_0)x
+\]
+其中初始值$G_0 = F_0 = 0, G_1 = F_2 = 1$, 于是:
+\[
+    G(x) = \frac{x}{1-3x + x^2}
+\]
+
+
+\section{4.2}
+
+由题意可得递推式为$a_n - a_{n-1} + a_{n-2} = 0$, 利用长除法可得$a_0=1, a_1=1$.
+
+\section{4.3}
+
+由于可知特征根为$3, -1$, 根据初始值$a_0, a_1$, 构造母函数$G(x) = \frac{1}{1 - 2x - 3x^2}$, 对应的递推关系为$a_n - 2a_{n-1} - 3a_{n-2} = 0$, 可以验证对任意$c,d$, 该递推关系成立.
+
+\section{4.4}
+
+注意到递推关系为$a_n - 2a_{n-1} + a_{n-2} = 5\cdot 1^n$, 而通解$a_n - 2a_{n-1} + a_{n-2} = 0$为$1$并且是二重根, 于是可设$a_n = An^2 + Bn+c$, 代入初始值$a_0 =1, a_1=2, a_2 = 8$, 解得:
+\[
+    a_n = \frac{5}{2}n^2 -\frac{3}{2}n + 1
+\]
+
+\section{4.5}
+
+假设总的数量为$a_n$, 其中以字母$A$开头数量为$b_n$, 可得递推关系:
+\begin{align*}
+    a_n = 3a_{n-1} + b_n \\
+    b_n = b_{n-1} + 4^{n-2} + 2a_{n-2}
+\end{align*}
+可得$b_n = a_n - 3a_{n-1}$, 代入可得:
+\[
+    a_n - 3a_{n-1} = a_{n-1} - 3a_{n-2} + 4^{n-2} + 2a_{n-2}
+\]
+化简得:
+\[
+    a_n - 4a_{n-1} +a_{n-2} = 4^{n-2}
+\]
+其中初始值$a_1=0,a_2=1$. 可得特征方程为$x^2 - 4x + 1=0$, 根为$2\pm \sqrt{3}$, 可设通解为$a_n = A(2+\sqrt{3})^n + B(2-\sqrt{3})^n$. 对于其特解, 可设$a_n = c4^n$, 于是代入初始值后求解得:
+\[
+    a_n = - \frac{2\sqrt{3}+3}{6}(2+\sqrt{3})^n + \frac{2\sqrt{3}-3}{6}(2-\sqrt{3})^n + 4^n
+\]
+
+\section{4.6}
+
+设原始汉诺塔问题的步骤数为$b_n$, 可得递推关系$b_n = 2b_{n-1} + 1$, 初始值$b_1=1$. 可解得$b_n = 2^n - 1$. 假设所求变种问题步骤数为$a_n$, 不失一般性, 考虑$n$为偶数: 可以首先用$b_{n-1}$步将$n-1$个圆盘移动到$C$柱, 在用一次将第$n$个圆盘移动到$B$柱. 接着用$b_{n-3}$次将$C$柱上前$n-3$个移动到$A$柱子, 用1次把第$n-2$个移到$B$柱子上, 最后问题转化为剩下$n-3$个圆盘所需的方案数, 于是:
+\[
+    a_n = b_{n-1} + 1 + b_{n-3} + 1 + a_{n-3} = a_{n-3} + 5\cdot 2^{n-3}
+\]
+根据初始值$a_1 = 1, a_2 = 2, a_3 = 5$, 可得：
+\[
+    a_{n} + a_{n-1} + a_{n-2} = 5\cdot 2^{n-2} - 2
+\]
+对于其通解$a_{n} + a_{n-1} + a_{n-2}=0$, 由于有一对共轭复根$\frac{-1\pm \sqrt{3}i}{2}$, 可设$a_n = A\cos \frac{2\pi}{3}n + B\sin \frac{2\pi}{3}n$. 关于其特解, 可设$a_n = k\cdot 2^n + b$, 于是解的形式为:
+\[
+    a_n = A\cos \frac{2\pi}{3}n + B\sin \frac{2\pi}{3}n + k\cdot 2^n + b
+\]
+待定常数后可得:
+\[
+    a_n = -\frac{1}{21}\cos \frac{2\pi}{3}n + \frac{\sqrt{3}}{7}\sin \frac{2\pi}{3}n + \frac{5}{7} \cdot 2^n - \frac{2}{3}
+\]
+
+\section{4.7}
+
+当$k=1$时, 当$n$任意大时, 无解。当$k>1$时, 假设长度为$n$时有$a_n$种方案, 若倒数第二个字母与最后一个字母不同, 则有$(k-1)a_{n-1}$种方案; 若相同, 则倒数第三个字母一定与这两个字母不同, 有$(k-1)a_{n-2}$种方案, 故递推关系为:
+\[
+    a_n = (k-1)a_{n-1} + (k-1)a_{n-2}
+\]
+初始值$a_1 = k, a_2 = k^2$. 可得特征方程为$x^2 - (k-1)x - (k-1) = 0$, 有两个实根$\frac{k-1 \pm \sqrt{(k-1)(k+3)}}{2}$. 设:
+\[
+    a_n = A\cdot \left ( \frac{k-1 + \sqrt{(k-1)(k+3)}}{2} \right)^n + B\cdot \left ( \frac{k-1 - \sqrt{(k-1)(k+3)}}{2} \right)^n
+\]
+代入初始值, 解得:
+\[
+    A = \frac{k}{2}\left (\frac{1}{k-1} + \frac{1}{\sqrt{(k-1)(k+3)}} \right ),\quad  B = \frac{k}{2}\left ( \frac{1}{k-1} - \frac{1}{\sqrt{(k-1)(k+3)}} \right )
+\]
+
+\section{4.8}
+
+假设$f$是一个光滑的函数, 且满足$f(t, n) = \sum_{k=1}^n k^t$, 于是$f(t, n) = f(t, n-1) + n^t$, 进而:
+\begin{align*}
+    f'(t, n) &= f'(t, n-1) + t\cdot n^{t-1} \\
+    &= f'(t, n-2) + t\cdot (n-1)^{t-1} + t\cdot n^{t-1} \\
+    &= \cdots \\
+    &= f'(t, 0) + t\cdot \sum_{k=1}^n k^{t-1} \\
+    &= tf(t-1, n) + f'(t, 0)
+\end{align*}
+于是:
+\[
+    f(t, n) = \int_{0}^n tf(t-1, x) + f'(t, 0) dx
+\]
+于是在求出$f(t-1, n)$后, 仅需求解不定积分结果后乘上$t$在待定常数项$f'(t, 0)$使得$f(t, 1)=1$即可. 已知$f(1,n)= \frac{n(n+1)}{2} = \frac{1}{2}n^2 + \frac{1}{2}n$, 可以依次算得:
+\begin{align*}
+    f(2, n) &= \frac{1}{3}n^3 + \frac{1}{2}n^2 + \frac{1}{6}n \\
+    f(3, n) &= \frac{1}{4}n^3 + \frac{1}{2}n^3 + \frac{1}{4}n^2\\
+    f(4, n) &= \frac{1}{5}n^5 + \frac{1}{2}n^4 + \frac{1}{3}n^3 - \frac{1}{30}n^2
+\end{align*}
+
+\section{4.9}
+
+\subsection{(1)}
+
+假设这$k$个不同的数中的第一个是$i$, 则剩下$k-1$个数需要在$[i+2, n]$这$n-i-1$个数中选择. 又因为所选结果必须两两不相邻, 所以$i\in[1, n-2k+2]$, 于是可得递推关系:
+\[
+    f(n, k) - \sum_{i=1}^{n-2k+2} f(n-i-1, k-1) = 0
+\]
+
+\subsection{(2)}
+
+猜想$f(n, k)=\binom{n-k+1}{k}$, 当$n=k=1$时符合, 假设$f(j, k)=\binom{j-k+1}{k}$, 则:
+\begin{align*}
+    f(j+1, k) &= \sum_{i=1}^{j-2k+3} f(j-i, k-1)\\
+    &= \sum_{i=0}^{j-2k+2} f(j-i-1, k-1)\\
+    &= \left (\sum_{i=1}^{j-2k+2} f(j-i-1, k-1) \right ) + f(j-1, k-1) \\
+    &= f(j, k) + f(j-1, k-1) \\
+    &= \binom{j-k+1}{k} + \binom{j-k+1}{k-1}\\
+    &= \binom{j-k+2}{k}
+\end{align*}
+得证.
+
+\subsection{(3)}
+
+相当于我们要去掉同时选了$1,n$的方案, 剩下的$k-2$个数在$[3, n-2]$中选, 这样的组合有$f(n-2, k-2)$个, 所以$g(n,k) = f(n, k) - f(n-4, k-2)$.
+
+\section{4.10}
+
+\subsection{(1)}
+
+设$a_n$为有$n$个正方形组成的路径的方案数, $b_n$为由$n-1$个正方形与一个直角边长为1的等腰直角三角形的方案数. 考虑直角边长为1的等腰直角三角形铺设的方向性, 可知$a_1=3, b_1=1$. 
+
+对于$a_n$，若最后一块砖是方砖, 则方案数为$a_{n-1}$; 若最后一块砖为直角边长为1的等腰直角三角形, 考虑两种摆放方式, 方案数为$2b_n$. 最后一块砖不可能是斜边长为2的砖头. 对于$b_n$, 若最后一块砖为斜边长为2的等腰直角三角形, 则方案数为$b_{n-1}$. 最后一块不可能为方砖.
+
+于是可得递推关系:
+\begin{align*}
+    a_n &= a_{n-1} + 2b_n \\
+    b_n &= a_{n-1} + b_{n-1}
+\end{align*}
+消去$b_n$, 得$a_n - 4a_{n-1} + a_{n-2} = 0$. 初始值$a_0 = 1, a_1=3, a_2 = 11$. 根据特征方程$x^2-4x+1=0$可知根为$2\pm\sqrt{3}$, 于是设解的形式为$A(2+\sqrt{3})^n + B(2-\sqrt{3})^n$, 代入初始值求得:
+\[
+    a_n = \frac{3+\sqrt{3}}{6}(2+\sqrt{3})^n + \frac{3-\sqrt{3}}{6}(2-\sqrt{3})^n
+\]
+
+\subsection{(2)}
+
+设$c_n$为总的砖数, $d_n$为由$n-1$个正方形与一个小等腰直角三角形组成的方案的总砖数. 
+
+对于$c_n$:
+\begin{itemize}
+    \item 最后一块砖为方砖, 方案数有$a_{n-1}$种, 前面合计用了$c_{n-1}$块砖
+    \item 最后一块为小等腰直角三角形, 方案数为$2b_n$, 前面合计用了$2d_n$块砖
+    \item 最后一块砖不可能是大等腰直角三角形砖
+\end{itemize}
+于是:
+\[
+    c_n = c_{n-1} + a_{n-1} + 2d_n + 2b_n
+\]
+
+对于$d_n$:
+\begin{itemize}
+    \item 最后一块为小等腰直角三角形砖, 方案数为$a_{n-1}$, 前面合计用了$c_{n-1}$块砖
+    \item 最后一块为大等腰直角三星砖, 方案数为$b_{n-1}$, 前面合计用了$d_{n-1}$块砖
+    \item 最后一块不可能是方砖
+\end{itemize}
+于是:
+\[
+    d_n = c_{n-1} + a_{n-1} + d_{n-1} + b_{n-1}
+\]
+
+整理以上递推式, 消去$d_n$,可得:
+\[
+    c_n - 4c_{n-1} + c_{n-2} = 2(a_n - a_{n-1})
+\]
+根据特征方程$x^2-4x+1=0$, 其根为$2\pm \sqrt{3}$. 又根据$a_n$的形式, 可设$c_n$解的形式为$(An + B)(2+\sqrt{3})^n + (Cn + D)(2-\sqrt{3})^n$, 待定常数项后得:
+
+\[
+    A = \frac{2+\sqrt{3}}{3}, B = \frac{\sqrt{3}}{18}, C = \frac{2-\sqrt{3}}{3}, D = -\frac{\sqrt{3}}{18}
+\]
+
+\end{document}
+
+
+
+
+

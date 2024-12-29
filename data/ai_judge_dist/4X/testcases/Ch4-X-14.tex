@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage{ctex}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+%If you want to title your bold things something different just make another thing exactly like this but replace "problem" with the name of the thing you want, like theorem or lemma or whatever
+ 
+\begin{document}
+ 
+%\renewcommand{\qedsymbol}{\filledbox}
+%Good resources for looking up how to do stuff:
+%Binary operators: http://www.access2science.com/latex/Binary.html
+%General help: http://en.wikibooks.org/wiki/LaTeX/Mathematics
+%Or just google stuff
+ 
+\title{第四章习题（基本）}
+\maketitle
+
+\section*{Problem 4.1}
+\subsection*{(1)}
+\begin{align*}
+    G_{n} - 3G_{n-1} + G_{n-2} &= 
+    F_{2n} - 3F_{2n-2} + F_{2n-4} \\&= 
+    (F_{2n-1} + F_{2n-2}) - 3F_{2n-2} + F_{2n-4} \\&= 
+    (F_{2n-3} + F_{2n-2} + F_{2n-2}) - 3F_{2n-2} + F_{2n-4} \\&= 
+    F_{2n-3} - F_{2n-2} + F_{2n-4} \\&= 0
+\end{align*}
+\subsection*{(2)}
+\begin{align*}
+    A(x) &= G_0 + G_1\cdot x + G_2 \cdot x^2 + \cdots\\
+    A(x) - 3xA(x) + x^2A(x) &= G_0 + (G_1 - 3G_0)x = x\\
+    A(x) &= \frac{x}{1 - 3x + x^2}
+\end{align*}
+
+\section*{Problem 4.2}
+\begin{align*}
+    a_n - a_{n-1} + a_{n-2} = 0\\
+    a_0 = 1, a_1 - a_0 = 0\\
+    a_0 = a_1 = 1
+\end{align*}
+
+\section*{Problem 4.3}
+特征根为$3, -1$，特征方程为$(x-3)(x+1) = x^2 - 2x - 3$，
+递推关系为$a_n - 2a_{n-1} - 3a_{n-2} = 0$。
+
+\section*{Problem 4.4}
+首先化为齐次线性递推式：
+\begin{align*}
+    a_n - 2a_{n-1} + a_{n-2} = a_{n-1} - 2a_{n-2} + a_{n-3}\\
+    a_n - 3a_{n-1} + 3a_{n-2} - a_{n-3} = 0
+\end{align*}
+特征多项式为$x^3 - 3x^2 + 3x - 1$，有3重特征根$x=1$。
+设$a_n = a + bn + cn^2$，根据$a_0 = 1, a_1 = 2, a_2 = 8$解得
+$a = 1, b = -3/2, c = 5/2$，所以$a_n = 1 -3n/2 + 5n^2/2$.
+
+\section*{Problem 4.5}
+设总方案数为$a_n$，其中以$A$开头的方案数为$b_n$，
+那么
+\begin{align*}
+    a_n &= 3a_{n-1} + b_n\\
+    b_n &= 2a_{n-2} + b_{n-1} + 4^{n-2}\\
+    2a_{n-2} + 4^{n-2} &= b_n - b_{n-1} = (a_n - 3a_{n-1}) - (a_{n-1} - 3a_{n-2})\\
+    a_{n} - 4a_{n-1} + a_{n-2} &= 4^{n-2}\\
+    a_{n} - 4a_{n-1} + a_{n-2} &= 4(a_{n-1} - 4a_{n-2} + a_{n-3})\\
+    a_n - 8a_{n-1} + 17a_{n-2} -4a_{n-3} &= 0
+\end{align*}
+特征根为$x_1 = 4, x_2 = 2+\sqrt{3}, x_3 = 2-\sqrt{3}$。
+设$a_n = a\cdot 4^n + b\cdot (2+\sqrt{3})^n + c\cdot (2-\sqrt{3})^n$，
+根据$a_0 = 0, a_1 = 0, a_2 = 1$解得$a = 1, b = -\frac{3+2\sqrt{3}}{6}, c = \frac{2\sqrt{3} - 3}{6}$。
+因此$a_n = 4^n -\frac{3+2\sqrt{3}}{6}\cdot (2+\sqrt{3})^n + \frac{2\sqrt{3} - 3}{6}\cdot (2-\sqrt{3})^n$.
+
+\section*{Problem 4.6}
+不妨设最终目标是把和$n$奇偶性相同的移动到$B$上，其余移动到$C$上。
+初始时，$$A = (1, 2, \cdots, n), B = (), C = ()$$
+首先需要达到以下状态（将$n$从$A$移到$B$后）：
+$$A = (), B = (n), C = (1, 2, \cdots, n-1)$$
+这需要$2^{n-1}$次。
+接下来需要达到以下状态（将$n-2$从$C$移到$B$后）：
+$$A = (1, 2, \cdots, n-3), B = (n-2, n), C = (n-1)$$
+这需要$2^{n-3}$次。
+接下来需要达到以下状态（将$n-3$从$A$移到$C$后）：
+$$A = (), B = (1,2, \cdots, n-4, n-2, n), C = (n-3, n-1)$$
+这需要$2^{n-4}$次。
+综上，总次数为$a_n = 2^{n-1} + 2^{n-3} + 2^{n-4} + 2^{n-6} + \cdots$，即
+\begin{equation*}
+    a_n = \left\{
+    \begin{aligned}
+    & \frac{5}{7}(2^{n}-1), \ n \equiv 0 \mod 3\\
+    & \frac{5\cdot 2^{n}-3}{7}, \ n \equiv 1 \mod 3\\
+    & \frac{5\cdot 2^{n}-6}{7}, \ n \equiv 2 \mod 3
+    \end{aligned}
+    \right.
+\end{equation*}
+
+\section*{Problem 4.7}
+令$a_n, b_n$分别表示以一个、两个相同字母结尾的方案数，那么
+\begin{align*}
+    b_n &= a_{n-1}\\
+    a_n &= (k-1)(a_{n-1} + b_{n-1})\\
+    a_n &= (k-1)(a_{n-1} + a_{n-2})
+\end{align*}
+根据$a_1 = k, a_2 = k(k-1)$解得$a_n = \frac{k}{\sqrt{k^2 + 2k - 3}} (\frac{k - 1 + \sqrt{k^2 + 2k - 3}}{2})^n - \frac{k}{\sqrt{k^2 + 2k - 3}} (\frac{k - 1 - \sqrt{k^2 + 2k - 3}}{2})^n$。
+总方法数$a_n + b_n = a_n + a_{n-1} = a_{n+1} / (k-1) = \frac{k}{(k-1)\sqrt{k^2 + 2k - 3}} (\frac{k - 1 + \sqrt{k^2 + 2k - 3}}{2})^{n+1} - \frac{k}{(k-1)\sqrt{k^2 + 2k - 3}} (\frac{k - 1 - \sqrt{k^2 + 2k - 3}}{2})^{n+1}$。
+
+\section*{Problem 4.8}
+\begin{align*}
+    \sum_{k=1}^n k^4 &= \sum_{k=1}^n k(k+1)(k+2)(k+3) - \left(6\sum_{k=1}^n k^3 + 11\sum_{k=1}^n k^2 + 6\sum_{k=1}^n k\right) \\
+    &= \frac{n(n+1)(n+2)(n+3)(n+4)}{5} - \left(6\cdot \frac{n^2(n+1)^2}{4} + 11\cdot \frac{n(n+1)(2n+1)}{6} + 
+    6\cdot \frac{n(n+1)}{2}\right)\\
+    &= \frac{n^5}{5} + \frac{n^4}{2} + \frac{n^3}{3} - \frac{n}{30}.
+\end{align*}
+
+\section*{Problem 4.9}
+\subsection*{(1)}
+若取$n$，方案数为$f(n-2, k-1)$。若不取$n$，方案数为$f(n-1, k)$。
+因此$f(n, k) = f(n-2, k-1) + f(n-1, k)$。
+\subsection*{(2)}
+下面用数学归纳法证明$f(n, k) = \binom{n-k+1}{k}$。
+首先对$n=2k-1$满足。假设对所有$n \le n_0, k \le k_0$且不同时取等的$(n, k)$都成立，
+下证对$(n_0, k_0)$成立：
+\begin{align*}
+    f(n_0, k_0) &= f(n_0 - 2, k_0 - 1) + f(n_0 - 1, k_0)\\
+    &= \binom{n_0 - k_0}{k_0 - 1} + \binom{n_0 - k_0}{k_0}\\
+    &= \binom{n_0 - k_0 + 1}{k_0}
+\end{align*}
+因此对所有$(n, k)$，$f(n, k) = \binom{n-k+1}{k}$。
+\subsection*{(3)}
+$g(n, k)$为$f(n, k)$减去$1$和$n$都被选取的方案数，即
+\begin{align*}
+    g(n, k) = f(n, k) - f(n-4, k-2) = \binom{n-k+1}{k} - \binom{n-k-1}{k-2}.
+\end{align*}
+
+\section*{Problem 4.10}
+\subsection*{(1)}
+设铺满$1\times n$的方案数为$a_n$，铺满$1\times n$加一个$1\times 1$的等腰直角三角形的方案数为$b_n$。那么
+\begin{align*}
+    a_n &= a_{n-1} + 2\cdot b_{n-1}\\
+    b_n &= a_n + b_{n-1}\\
+    a_n &= b_n - b_{n-1} = \frac{1}{2}(a_{n+1} - a_n) - \frac{1}{2}(a_n - a_{n-1})\\
+    2a_n &= a_{n+1} - 2a_n + a_{n-1}\\
+    a_{n+1} - 4a_n + a_{n-1} &= 0
+\end{align*}
+根据$a_1 = 3, a_2 = 11$解得$a_n = \frac{3+\sqrt{3}}{6}(2+\sqrt{3})^n + \frac{3-\sqrt{3}}{6}(2-\sqrt{3})^n$.
+
+\subsection*{(2)}
+设铺满$1\times n$的各方案砖数总和为$A_n$，铺满$1\times n$加一个$1\times 1$的等腰直角三角形的各方案砖数总和为$B_n$。那么
+\begin{align*}
+    &A_n = A_{n-1} + 2\cdot B_{n-1} + a_n\\
+    &B_n = A_n + B_{n-1} + b_n\\
+    &A_{n+1} - 4A_n + A_{n-1} = 4b_n\\
+    &(A_{n+1} - 4A_n + A_{n-1}) - 4(A_{n} - 4A_{n-1} + A_{n-2}) + (A_{n-1} - 4A_{n-2} + A_{n-3}) = 0
+\end{align*}
+特征多项式为$(x^2 - 4x + 1)^2$，因此可以设
+$A_n = (2+\sqrt{3})^n(a+bn) + (2-\sqrt{3})^n(c+dn)$.
+接下来根据$A_0 = 0, A_1 = 5, A_2 = 36, A_3 = 199$可以解出$a = \frac{\sqrt{3}}{18},b = \frac{2 + \sqrt{3}}{3},c = -\frac{\sqrt{3}}{18},d = \frac{2 - \sqrt{3}}{3}$.
+
+\end{document}

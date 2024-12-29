@@ -1,0 +1,403 @@
+\documentclass[a4paper]{ctexart}
+\usepackage{geometry}		%页面设置
+\usepackage{amsmath}		%数学公式
+\usepackage{graphicx}		%图像
+%\usepackage{subfig}		%子图像
+\usepackage{listings}		%表单，用于插入代码
+\usepackage{xcolor}		%颜色，用于插入代码
+\usepackage{enumerate}	%编号
+\usepackage{siunitx}		%带SI单位的数字
+\usepackage{multirow}		%表格合并行
+\usepackage{listings}
+\usepackage{amssymb}
+\usepackage{subfigure}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+%\usepackage{textcomp} % 必须加上，否则报错
+
+%\usepackage[section]{placeins}	%强制浮动体与章节对齐
+
+\newcommand*{\dif}{\mathop{}\!\mathrm{d}}	%定义微分算子
+
+%设置用于插入代码的表单格式
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{
+backgroundcolor=\color{white},   				% choose the background color
+language=Matlab,
+basicstyle=\footnotesize\ttfamily,        		% size of fonts used for the code
+columns=fullflexible,
+breaklines=true,                 				% automatic line breaking only at whitespace
+captionpos=b,                    				% sets the caption-position to bottom
+tabsize=4,
+commentstyle=\color{mygreen},    				% comment style
+escapeinside={\%*}{*)},          				% if you want to add LaTeX within your code
+keywordstyle=\color{blue},       				% keyword style
+stringstyle=\color{mymauve}\ttfamily,     		% string literal style
+frame=shadowbox,
+rulesepcolor=\color{red!20!green!20!blue!20},	% identifierstyle=\color{red},
+extendedchars=false,  %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+escapebegin=\begin{CJK*}{GBK}{hei},escapeend=\end{CJK*}      % 代码中出现中文必须加上，否则报错
+numbers=left,
+numberstyle=\tiny,
+escapeinside=' ',
+xleftmargin=2em,
+xrightmargin=2em,
+aboveskip=1em
+%showstringspaces=flase,%不显示代码字符串中间的空格标记
+}
+
+\title{组合数学第四次作业}
+
+\begin{document}
+
+%封面页
+\maketitle
+\thispagestyle{empty}		%不编页码
+
+%目录页
+%\newpage
+\tableofcontents
+\thispagestyle{empty}		%不编页码
+
+%正文
+\newpage
+\setcounter{page}{1}
+
+我们选择\textbf{基本}的题目进行作答。
+\section{Problem 4.1}
+\subsection{Solution}
+\subsubsection{(a)}
+Proof:
+\begin{equation}
+    G_n-3G_{n-1}+G_{n-2} = F_{2n} - 3F_{2n-2} + F_{2n-4} = F_{2n-1} - 2F_{2n-2} +F_{2n-4} = -F_{2n-2} + F_{2n-3} + F_{2n-4} = 0
+\end{equation}
+\subsubsection{(b)}
+我们有:
+\begin{equation}
+    f(x) = G_0 + G_1x + \dots + G_nx^n + \dots
+\end{equation}
+\begin{equation}
+    -3xf(x) = -3G_0(x) -3G_1(x) - \dots - 3G_{n-1}x^n - \dots
+\end{equation}
+\begin{equation}
+    x^2f(x) = G_0x^2 + \dots + G_{n-2}x^n + \dots
+\end{equation}
+以上三式相加我们可以得到：
+\begin{equation}
+    (x^2-3x+1)f(x)=G_0+G_1x-3G_0x = x
+\end{equation}
+从而：
+\begin{equation}
+    f(x) = \frac{x}{x^2-3x+1}
+\end{equation}
+
+\section{Problem 4.2}
+\subsection{Solution}
+我们有$f(x)=\frac{1}{1-x+x^2}$，即$f(x)-xf(x)+x^2f(x)=1$。考察$x^n$的对应项我们可以得到:
+\begin{equation}
+    a_n-a_{n-1}+a_{n-2} = 0
+\end{equation}
+考察初始值，即首先考察常数项即有$a_0=1$,考察一次项我们有$a_1-a_0=0$,从而$a_1=1$。
+
+\section{Problem 4.3}
+\subsection{Solution}
+注意到该递推关系的两个特征根为3和-1，所以对应的特征方程为$x^2-2x-3=0$,从而对应的递归关系为:
+\begin{equation}
+    a_n - 2a_{n-1} -3a_{n-2} = 0
+\end{equation}
+
+\section{Problem 4.4}
+\subsection{Solution}
+很明显的该递推式对应的特征方程有三个特征根且均为1，因此对应的通项公式的形式为$a_n = Ax^2 + Bx + C$,首先我们有$a_0=1, a_1=2, a_2 = 2a_1 - a_0 +5 =8$,从而我们可以列出方程求解得到$A= \frac{5}{2},B=-\frac{3}{2}, C=1$,从而该问题的解为:
+\begin{equation}
+    a_n = \frac{5}{2}n^2 -\frac{3}{2}n+1
+\end{equation}
+
+
+\section{Problem 4.5}
+\subsection{Solution}
+假设$n$位字符串中不出现AB的种类为$g(n)$,出现至少一次的次数为$f(n)$，显然有:
+\begin{equation}
+    f(n) + g(n) = 4^n
+\end{equation}
+分类讨论，若前$n-1$位的字符串中出现子串AB，那么可能的种类为$f(n-1)$，第$n$位随机选取，共$4$种，因此总计$4f(n-1)$种可能的序列；若前$n-1$位的字符串种未出现子串AB，那么只可能出现在第$n-1$位和第$n$位，那么前$n-2$位种未出现子串AB，从而可能的情况数为$g(n-2)$。因此可以得到$f(n)=4f(n-1)+g(n-2)=4f(n-1)+4^{n-2}-f(n-2)$，从而特征方程为:
+\begin{equation}
+    x^2-4x+1=0
+\end{equation}
+其两个特征根为$x_1=2+\sqrt{3},x_2=2-\sqrt{3}$，$x_3=4$也是另一个特征根，从而可以写出解的形式：
+\begin{equation}
+    f(n)=c_1(2+\sqrt{3})^n+c_2(2-\sqrt{3})^n+c_34^n
+\end{equation}
+考察特解$f(0)=0,f(1)=0,f(2)=1$,可以列出线性方程：
+\begin{equation}
+    \left[
+        \begin{array}{ccc}
+            1          & 1           & 1  \\
+            2+\sqrt{3} & 2-\sqrt{3}  & 4  \\
+            7+\sqrt{3} & 7-4\sqrt{3} & 16
+        \end{array}
+        \right]
+    \left[
+        \begin{array}{c}
+            c_{1} \\
+            c_{2} \\
+            c_{3}
+        \end{array}
+        \right]
+    =
+    \left[
+        \begin{array}{c}
+            0 \\
+            0 \\
+            1
+        \end{array}
+        \right]
+\end{equation}
+从而可以解得：
+\begin{equation}
+    \left[
+        \begin{array}{c}
+            c_1 \\
+            c_2 \\
+            c_3
+        \end{array}
+        \right]
+    =
+    \left[
+        \begin{array}{c}
+            -\frac{3+2\sqrt{3}}{6} \\
+            -\frac{3-2\sqrt{3}}{6} \\
+            1
+        \end{array}
+        \right]
+\end{equation}
+从而我们可以得到所有的可能的情况数为:
+\begin{equation}
+    f(n) = -\frac{3+2\sqrt{3}}{6}(2+\sqrt{3})^n-\frac{3-2\sqrt{3}}{6}(2-\sqrt{3})^n+4^n
+\end{equation}
+
+\section{Problem 4.6}
+\subsection{Solution}
+首先我们需要想到一点，$n$的奇偶性对结论没有区别，因为实际上直接将B和C交换即可，不会影响结论。我们不妨假设$n$为偶数，假设总的可能的情况数量为$f(n)$，那么首先我们需要将$n$号盘移动到B号柱子上，这意味着我们需要先把$1$到$n-1$号盘移动到C号柱子上，由汉诺塔的结论可以知道这样的次数为$2^{n-1}-1$，然后我们就可以将$n$号盘移动到B号柱子上，次数为$1$。接着我们将$n-1$号盘留在C号柱子上，我们现在需要将$n-2$号盘移动到B号柱子上，这意味着我们需要首先将$1$到$n-3$号盘移动到A号柱子上，由汉诺塔的结论，移动的次数为$2^{n-3}-1$，然后将$n-3$号盘移动到B号柱子上，次数为$1$。现在的问题就化归为$n-3$的情况，次数为$f(n-3)$,从而我们得到递推关系：
+\begin{equation}
+    f(n) = f(n-3)+2^{n-1}+2^{n-3}
+\end{equation}
+考察初始值，显然由$f(1)=1$,$f(2)=2$,$f(3)=5$,从而我们可以开始通过递推关系求解通项公式。
+\par
+\begin{itemize}
+    \item 当n=3k,k为正整数时：$f(n)=2^{n-1}+2^{n-3}+2^{n-4}+2^{n-6}+\dots+2^5+2^3+f(3)=2^{n-1}+2^{n-2}+\dots+2^3+2^2+2^1+2^0+f(3)-2^2-2^0-(2^{n-1}+2^{n-4}+\dots+2^4+2^1)=\frac{5\times 2^n-5}{7}$
+    \item 同理可得n=3k+1,k为正整数的情况：$f(n) = \frac{5\times 2^n-3}{7}$
+    \item 同理可的n=3k+2,k为正整数的情况: $f(n)=\frac{5\times 2^n-6}{7}$
+\end{itemize}
+
+\section{Problem 4.7}
+\subsection{Solution}
+假设满足条件的方案数为$f(n)$，若$k=1$，那么$f(1)=f(2)=1,f(n)=0,n\geq 3$,下面考虑$k\geq 2$的情况。假设满足条件且字符串最后两个字母相同的情况数为$g(n)$,满足条件且最后两个字符串不同的条件数为$h(n)$,显然有:
+\begin{equation}
+    f(n)=g(n)+h(n)
+\end{equation}
+考察$f(n)$，若字符串倒数第二个和倒数第三个字母不相同，那么最后一个字母就有k种选择，总计为$kh(n-1)$种可能性；若字符串倒数第二个字母和倒数第三个字母相同，那么最后一个字母有$k-1$种选择，总计为$(k-1)g(n-1)$,从而：
+\begin{equation}
+    f(n) = (k-1)g(n-1)+kh(n-1)=(k-1)f(n-1)+h(n-1)
+\end{equation}
+再考察$h(n)$,前$n-1$个字母显然是满足没有连续的三个字母，而第$n$个字母有$k-1$种可能性，总计为$(k-1)f(n-1)$种可能性，从而有：
+\begin{equation}
+    h(n)=(k-1)f(n-1)
+\end{equation}
+从而我们可以列出递推关系：
+\begin{equation}
+    f(n)=(k-1)f(n-1)+h(n-1)=(k-1)f(n-1)+(k-1)f(n-2)
+\end{equation}
+从而可以求出两个特征根是:
+\begin{equation}
+    x_1=\frac{k-1+\sqrt{k^2+2k-3}}{2}, x_2=\frac{k-1-\sqrt{k^2+2k-3}}{2}
+\end{equation}
+从而我们写出通解形式：
+\begin{equation}
+    f(n)=c_1(\frac{k-1+\sqrt{k^2+2k-3}}{2})^n+c_2(\frac{k-1-\sqrt{k^2+2k-3}}{2})^n
+\end{equation}
+下面确定特解：$f(0)=0, f(1)=k$，从而我们有以下矩阵方程:
+\begin{equation}
+    \left[
+        \begin{array}{cc}
+            1   & 1   \\
+            x_1 & x_2
+        \end{array}
+        \right]
+    \left[
+        \begin{array}{c}
+            c_{1} \\
+            c_{2}
+        \end{array}
+        \right]
+    =
+    \left[
+        \begin{array}{c}
+            0 \\
+            k
+        \end{array}
+        \right]
+\end{equation}
+从而可以解得:
+\begin{equation}
+    \left[
+        \begin{array}{c}
+            c_1 \\
+            c_2
+        \end{array}
+        \right]
+    =
+    \left[
+        \begin{array}{c}
+            \frac{k}{\sqrt{k^2+2k-3}} \\
+            -\frac{k}{\sqrt{k^2+2k-3}}
+        \end{array}
+        \right]
+\end{equation}
+从而我们可以得到通项公式为:
+\begin{equation}
+    f(n)= \frac{k}{\sqrt{k^2+2k-3}}((\frac{k-1+\sqrt{k^2+2k-3}}{2})^n - (\frac{k-1-\sqrt{k^2+2k-3}}{2})^n)
+\end{equation}
+
+\section{Problem 4.8}
+\subsection{Solution}
+我们使用逐差法解决该问题。首先设$S_n = \sum_{k=1}^n k^4$,那么我们有$S_n-S_{n-1}=n^4$, 从而$S_{n-1}-S_{n-2}=(n-1)^4$，做差可以得到：
+\begin{equation}
+    S_{n}-2S_{n-1}+S_{n-2}=4n^3-6n^2+4n
+\end{equation}
+同理我们继续错位逐差可以继续降次：
+\begin{equation}
+    S_n-3S_{n-1}+3S_{n-2}-S_{n-3}=12n^2-24n+14
+\end{equation}
+\begin{equation}
+    S_n-4S_{n-1}+6S_{n-2}-4S_{n-3}+S_{n-4}=24n-36
+\end{equation}
+\begin{equation}
+    S_n-5S_{n-1}+10S_{n-2}-10S_{n-3}+5S_{n-4}-S_{n-5}=24
+\end{equation}
+\begin{equation}
+    S_n-6S_{n-1}+15S_{n-2}-20S_{n-3}+15S_{n-4}-6S_{n-5}+S_{n-6}=0
+\end{equation}
+从而我们可以根据递推式获得其特征方程并求出特征根，我们发现其6个特征根均为1，从而$S_n$具有如下的结构：
+\begin{equation}
+    S_n= An^5+Bn^4+Cn^3+Dn^2+En+F
+\end{equation}
+带入起始项可以解得参数，带入即可得到:
+\begin{equation}
+    S_n=\frac{1}{5}n^5+\frac{1}{2}n^4+\frac{1}{3}n^3-\frac{1}{30}n
+\end{equation}
+
+\section{Problem 4.9}
+\subsection{Solution}
+\subsubsection{(a)}
+若第n个未被选中，那么可能的情况数为$f(n-1,k)$；若第n个被选中，那么可能的情况数为$f(n-2,k-1)$，从而递推关系为：
+\begin{equation}
+    f(n,k) = f(n-1,k) + f(n-2,k-1), n\geq k
+\end{equation}
+其中初始条件为$f(n,1)=n$
+\subsubsection{(b)}
+我们用数学归纳法证明:
+\begin{equation}
+    f(n,k) = \binom{n-k+1}{k}
+\end{equation}
+对$n+k(\geq 2)$做归纳，首先$n+k=2$时，即$n=k=1$时结论显然成立。假设结论对小于$n+k$的$(n,k)$对成立，那么我们有:
+\begin{equation}
+    f(n,k) = f(n-1,k) + f(n-2,k-1)=\binom{n-k}{k}+\binom{n-k}{k-1}=\binom{n-k+1}{k}
+\end{equation}
+根据数学归纳法结论成立！
+
+\subsubsection{(c)}
+对于$f(n,k)$考察如下情况：若$(n,1)$这对没有被同时选中，那么就是$g(n,k)$种可能性；若$(n,1)$这对被同时选中了，那么$2$和$n-1$也无法被选中，其可能的情况数为$f(n-4,k-2)$，从而我们可以得到等式$f(n,k)=g(n,k)+f(n-4,k-2)$，整理可得:
+\begin{equation}
+    g(n,k) = f(n,k) - f(n-4,k-2) = \binom{n-k+1}{k} - \binom{n-k-1}{k-2}
+\end{equation}
+
+\section{Problem 4.10}
+\subsection{Solution}
+\subsubsection{(a)}
+假设所有可能的铺砖方案数为$f(n)$,我们思考一下最后一个正方型砖应该怎么铺满。第一种可能是直接使用$1\times 1$的方砖铺满，那么此时所有可能的情况数量为$f(n-1)$；第二种可能是不使用$1\times 1$的方砖,那么我们就需要使用等腰直角三角形的方砖，首先显而易见我们必须使用结构直角边长为1的等腰直角三角形砖去铺右侧，这里有两种铺法且是旋转等价的，我们任取一种即可，那么剩下的一半铺满的方法有两种，其中一种是使用直角边长为1的等腰直角三角形铺满，有$f(n-1)$种，另一种是使用斜边长为 2 的等腰直角三角形砖，那么我们需要考虑第$n-1$块砖，同理的可以进行分析结论为$f(n-2)$，并继续下去直到第一块砖，并考虑两种铺法的等价性，因此第二种情况的种类总计为$2(f(n-1)+f(n-2)+\dots+f(1))$。从而我们现在能够得到关系式:
+\begin{equation}
+    f(n) = f(n-1) + 2(f(n-1)+f(n-2)+\dots+f(1))
+\end{equation}
+我们考察$f(n+1)$并重复利用上述等式：
+\begin{equation}
+    f(n+1) = 3f(n) + 2(f(n-1)+f(n-2)+\dots+f(1))=3f(n)+f(n)-f(n-1)=4f(n)-f(n-1)
+\end{equation}
+从而其两个特征根为:
+\begin{equation}
+    x_1 = 2+\sqrt{3},x_2=2-\sqrt{3}
+\end{equation}
+从而通项公式为:
+\begin{equation}
+    f(n) = c_1(2+\sqrt{3})^n+c_2(2-\sqrt{3})^n
+\end{equation}
+考察初始值:$f(1)=3,f(2)=11$,我们有：
+\begin{equation}
+    \left[
+        \begin{array}{cc}
+            x_1   & x_2   \\
+            x_1^2 & x_2^2
+        \end{array}
+        \right]
+    \left[
+        \begin{array}{c}
+            c_{1} \\
+            c_{2}
+        \end{array}
+        \right]
+    =
+    \left[
+        \begin{array}{c}
+            3 \\
+            11
+        \end{array}
+        \right]
+\end{equation}
+从而可以解得:
+\begin{equation}
+    \left[
+        \begin{array}{c}
+            c_1 \\
+            c_2
+        \end{array}
+        \right]
+    =
+    \left[
+        \begin{array}{c}
+            \frac{3+\sqrt{3}}{3} \\
+            \frac{3-\sqrt{3}}{3}
+        \end{array}
+        \right]
+\end{equation}
+从而我们可以得到通项公式为:
+\begin{equation}
+    f(n) = \frac{3+\sqrt{3}}{3}(2+\sqrt{3})^n+\frac{3-\sqrt{3}}{3}(2-\sqrt{3})^n
+\end{equation}
+\subsubsection{(b)}
+我们考察最后一块砖，设总的可能情况的总砖数量为$g(n)$，分两种情况讨论:第一种情况是最后一块砖使用$1\times 1$的方砖铺满，那么此时使用砖块的总数量为$g(n-1)+f(n-1)$;第二种情况是最后一块砖不使用$1\times 1$的方砖，那么右半侧的砖头只能使用直角边长为1的等腰直角三角形砖铺，这有两种铺法且是旋转对称的，我们任取一种考察，最后一块砖的另一部分可以使用直角边长为1的等腰直角三角形砖铺,那么所使用的砖块为$g(n-1)+2f(n-1)$,如果使用斜边长为2的等腰直角三角形砖，那么同上面(a)的情况一样我们可以有如下递推关系：
+\begin{equation}
+    g(n) = g(n-1) + f(n-1) + 2(g(n-1)+2f(n-1)) + 2(g(n-2) + 3f(n-2)) + \dots + 2(g(1)+nf(1))
+\end{equation}
+将$n$改为$n+1$可得：
+\begin{equation}
+    g(n+1) = g(n) + f(n) + 2(g(n) + 2f(n)) + 2(g(n-1) + 3f(n-1)) + \dots + 2(g(1)+(n+1)f(1))
+\end{equation}
+两式做差我们可以得到:
+\begin{equation}
+    g(n+1) - 4g(n)+g(n-1) = 6f(n)-2f(n-1)
+\end{equation}
+注意到$g(n+1)-4g(n)+g(n-1)$的特征根也为$x_1,x_2$，而$f(n)$也为$Ax_1^n+Bx_2^n$的形式，因此我们可以知道该递推式的特征根为2重$x_1$和2重$x_2$。从而$g(n)$有如下形式：
+\begin{equation}
+    g(n) = (An+B)(2+\sqrt{3})^n + (Cn+D)(2-\sqrt{3})^n
+\end{equation}
+然后我们可以根据初值求解，其中$g(0)=0,g(1)=5,g(2)=36,g(3)=199$,我们可以得到最终通解为:
+\begin{equation}
+    f(n) = (\frac{2+\sqrt{3}}{3}n+\frac{\sqrt{3}}{18})(2+\sqrt{3})^n + (\frac{2-\sqrt{3}}{3}n-\frac{\sqrt{3}}{18})(2-\sqrt{3})^n
+\end{equation}
+\end{document}
+

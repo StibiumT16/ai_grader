@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ctex}
+\begin{document}
+
+\title{ 第三章基础}
+\author{***}
+\date{}
+\maketitle
+
+3.1\\
+设$A(x)=\sum_{n = 0}^{\infty}n^3x^n$，$B(x)=\sum_{n = 0}^{\infty}n^2x^n$,$C(x)=\sum_{n = 0}^{\infty}nx^n$\\
+$C(x)=(\sum_{n = 0}^{\infty}x^n)'x=(\frac{1}{1-x})'x=\frac{x}{(1-x)^2}$\\
+$B(x)=(\sum_{n = 0}^{\infty}nx^n)'x=(\frac{x}{(1-x)^2})'x=\frac{(1+x)x}{(1-x)^3}$\\
+$A(x)=(\sum_{n = 0}^{\infty}{n^2}x^n)'x=(\frac{(1+x)x}{(1-x)^3})'x=\frac{{x^2}+4x+1}{(1-x)^4}$\\
+所以母函数为$A(x)=\frac{{x^2}+4x+1}{(1-x)^4}$\\
+
+
+3.2\\
+引理：（数列前缀和）若$a_n=\sum_{k = 0}^{n}b_n$,则$A(x)=\frac{B(x)}{1-x}.$证明参考组合数学讲义第三章定理3.3\\
+$a_n=\binom{n+3}{3}=\sum_{k = 0}^{n}\binom{k+2}{2}$,母函数$A(x)$\\
+$b_n=\binom{n+2}{2}=\sum_{k = 0}^{n}\binom{k+1}{1}$,母函数$B(x)$\\
+$c_n=\binom{n+1}{1}=\sum_{k = 0}^{n}1$,母函数$C(x)$\\
+$C(x)=\frac{\sum_{i = 0}^{\infty}x^i}{1-x}=\frac{1}{(1-x)^2}$\\
+因为$b_n=\sum_{k = 0}^{n}c_n$,所以$B(x)=\frac{C(x)}{1-x}=\frac{1}{(1-x)^3}$\\
+因为$a_n=\sum_{k = 0}^{n}b_n$,所以$A(x)=\frac{B(x)}{1-x}=\frac{1}{(1-x)^4}$\\
+所以母函数为$\frac{1}{(1-x)^4}$\\
+
+3.3\\
+设$b_n=n^3(n\geqslant0)$\\
+$A(x)=a_0+a_1x+a_2x^2+\ldots$\\
+$=b_1+(b_1+b_2)x+(b_1+b_2+b_3)x^2+\ldots$\\
+$=b_1(1+x+x^2+\ldots)+b_2x(1+x+x^2+\ldots)+b_3x^2(1+x+x^2+\ldots)$\\
+$=\frac{b_0+b_1x+b_2x^2+\ldots}{(1-x)x}$\\
+$=\frac{x^2+4x+1}{x(1-x)^5}$\\
+
+3.4\\
+$B(x)=b_0+b_1x+b_2x^2+\ldots$\\
+$=(a_0+a_1x+a_2x^2+\ldots)-x(a_0+a_1x+a_2x^2+\ldots)$\\
+$=A(x)(1-x)$\\
+$=\frac{4-3x}{1+x-x^3}$\\
+
+
+\end{document}

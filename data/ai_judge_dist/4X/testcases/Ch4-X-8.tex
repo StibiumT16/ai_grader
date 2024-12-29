@@ -1,0 +1,372 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{ctex}
+\usepackage{titlesec}  % For customizing section titles
+\usepackage{amsmath,amssymb}
+\usepackage{fontspec} % Allows font customization in XeLaTeX
+
+\usepackage[a4paper, margin=1in]{geometry} % Adjust margins here (1 inch in this case)
+
+\title{组合数学HW4}
+
+\begin{document}
+
+\maketitle
+\section*{4.1}
+
+(1) 证明：
+
+\[
+F_n=F_{n-1}+F_{n-2}
+\]
+
+\[
+\Rightarrow
+G_n=F_{2n}=F_{2n-1}+F_{2n-2}=2F_{2n-2}+F_{2n-3}=3F_{2n-3}+2F_{2n-4}
+\]
+
+\[
+\Rightarrow
+\left\{
+\begin{aligned}
+G_{n-1}&=F_{2n-2}=F_{2n-3}+F_{2n-4}, \\
+G_{n-2}&=F_{2n-4}
+\end{aligned}
+\right.
+\]
+
+\[
+\Rightarrow
+G_n=3F_{2n-3}+2F_{2n-4}=3(F_{2n-3}+F_{2n-4})-F_{2n-4}=3G_{n-1}-G_{n-2}
+\]
+
+\[
+\Rightarrow
+G_n-3G_{n-1}+G_{n-2}=0
+\]
+
+
+(2) 
+
+根据(1):
+\[
+\sum_{n=2}^{\infty}(G_n-3G_{n-1}+G_{n-2})x^n=0
+\]
+
+又:
+\[
+\left\{
+\begin{aligned}
+G_0&=0 \\
+G_1&=1 \\
+\end{aligned}
+\right.
+\]
+
+\[
+\Rightarrow
+\sum_{n=2}^\infty G_nx^n = G(x)-G_0-G_1x = G(x)-x
+\]
+
+\[
+\Rightarrow
+G(x)-x=3(G(x)-x)x-G(x)x^2
+\]
+
+\[
+\Rightarrow
+G(x)=\dfrac{x}{1-3x+x^2}
+\]
+
+\subsection*{4.2}
+
+\[
+(1-x+x^2)G(x) = 1
+\]
+
+\[
+\Rightarrow
+\sum_{n=0}^\infty{a_nx^n} - \sum_{n=0}^\infty{a_{n}x^{n+1}} + \sum_{n=0}^\infty{a_{n}x^{n+2}} = 1
+\]
+
+\[
+\Rightarrow
+\sum_{n=0}^\infty{a_nx^n} - \sum_{n=1}^\infty{a_{n-1}x^{n}} + \sum_{n=2}^\infty{a_{n-2}x^{n}} = 1
+\]
+
+\[
+\Rightarrow
+a_0+(a_1-a_0)x+\sum_{n=2}^\infty{(a_n-a_{n-1}+a_{n-2})x^n}=1
+\]
+
+\[
+\Rightarrow
+\left\{
+\begin{aligned}
+&a_0=1 \\
+&a_1-a_0=0 \\
+&a_n-a_{n-1}+a_{n-2}=0
+\end{aligned}
+\right.
+\]
+
+\[
+\Rightarrow
+\left\{
+\begin{aligned}
+&\text{递推式：}a_n=a_{n-1}-a_{n-2} \\
+&\text{初值：}a_0 = a_1 = 1
+\end{aligned}
+\right.
+\]
+
+\subsection*{4.3}
+
+特征方程的根为：$3,-1$，据此可得不含$c,d$的线性常系数递推关系：$a_n-2a_{n-1}-3a_{n-2}=0$，$a_0=c+d,a_1=3c-d$
+
+\subsection*{4.4}
+
+\[
+\left\{
+\begin{aligned}
+&a_n-2a_{n-1}+a_{n-2}=5 \\
+&a_{n+1}-2a_n+a_{n-1}=5
+\end{aligned}
+\right.
+\]
+
+\[
+\Rightarrow
+\left\{
+a_{n+1}-3a_n+3a_{n-1}-a_{n-2}=0
+\right.
+\]
+
+特征方程为
+
+\[
+x^3-3x^2+3x-1=0
+\]
+
+有 3 重根 $\alpha=1$，故通解为 $a_n=(A+Bn+Cn^2)1^n=A+Bn+Cn^2$
+
+由
+\[
+\left\{
+\begin{aligned}
+&a_0=A=1 \\
+&a_1=A+B+C=2 \\
+&a_2=A+2B+4C=8
+\end{aligned}
+\right.
+\]
+
+解得 $A=1,B=-\dfrac{3}{2},C=\dfrac{5}{2}$，故 $a_n=1-\dfrac{3}{2}n+\dfrac{5}{2}n^2$
+
+\subsection*{4.5}
+
+设 $a_n$ 为满足要求的 $n$ 位字符串数目。
+
+考虑最后一次出现 $AB$ 的位置：设 $AB$ 的最后一个字母 $B$ 在第 $k$ 位，则 $k$ 从 2 到 $n$ 遍历。
+
+当 $k=n$ 时，前 $n-2$ 位可以是任意字母，共 $4^{n-2}$ 种。
+
+当 $k<n$ 时，第 $k+1$ 到第 $n$ 位不能出现 $AB$，设这样的字符串数为 $b_{n-k}$。
+
+则有：$a_n=4^{n-2}+\sum_{k=2}^{n-1}4^{k-2}b_{n-k}$
+
+对于不含 $AB$ 的字符串，考虑每个位置：若前一个字母不是 $A$，则当前位置可以是任意字母；若前一个字母是 $A$，则当前位置不能是 $B$。
+
+设 $b_n$ 为长度为 $n$ 的不含 $AB$ 的字符串数，$c_n$ 为长度为 $n$ 且末尾是 $A$ 的不含 $AB$ 的字符串数。则：
+
+$b_n=4b_{n-1}-c_{n-1}$（总数减去末尾是 $A$ 的情况下只能接 3 个字母）
+
+$c_n=b_{n-1}$（去掉末尾的 $A$ 后一定是不含 $AB$ 的字符串）
+
+初值：$b_1=4,c_1=1$
+
+解得：$b_n=3*4^{n-1}+1$
+
+代回原式：$a_n=4^{n-2}+\sum_{k=2}^{n-1}4^{k-2}(3*4^{n-k-1}+1)$
+
+$=4^{n-2}+3\sum_{k=2}^{n-1}4^{n-3}+\sum_{k=2}^{n-1}4^{k-2}$
+
+$=4^{n-2}+3(n-2)4^{n-3}+\dfrac{4^{n-2}-1}{3}$
+
+$=4^{n-2}(1+\dfrac{3(n-2)}{4}+\dfrac{1}{3})-\dfrac{1}{3}$
+
+$=\dfrac{4^{n-2}(3n+1)-1}{3}$
+
+
+
+\subsection*{4.6}
+
+设 $f(n)$ 为将 $n$ 个圆盘按要求移动所需的最小步数。
+
+在移动最大的圆盘之前，需要将上面 $n-1$ 个圆盘移到某根柱子上（不能是目标柱）。移动完最大圆盘后，再将这 $n-1$ 个圆盘按要求分配到 $B,C$ 两根柱子上。
+
+记 $g(n)$ 为将 $n$ 个圆盘按大小顺序移到某根柱子上所需的最小步数，显然 $g(n)=2^n-1$。
+
+则有递推关系：
+\[
+f(n) = g(n-1) + 1 + f(n-1) = 2^{n-1} + f(n-1)
+\]
+
+初值 $f(1)=1$
+
+解得：$f(n)=2^n-1+2^{n-1}-1+2^{n-2}-1+...+2^1-1+1-1=3*2^{n-1}-1$
+
+因此，将 $n$ 个圆盘按要求移动所需的最小步数为 $3*2^{n-1}-1$。
+
+
+\subsection*{4.7}
+
+设 $a_n$ 为长度为 $n$ 的满足条件的字符串数，$b_n$ 为长度为 $n$ 且末尾两个字母相同的满足条件的字符串数。
+
+对于长度为 $n$ 的字符串：
+\begin{itemize}
+    \item 若末尾两个字母不同，则可以接任意字母
+    \item 若末尾两个字母相同，则不能再接相同的字母
+\end{itemize}
+
+因此有递推关系：
+\[
+\begin{cases}
+a_n = (a_{n-1}-b_{n-1})*k + b_{n-1}*(k-1) = ka_{n-1}-b_{n-1} \\
+b_n = (a_{n-1}-b_{n-1})*1 = a_{n-1}-b_{n-1}
+\end{cases}
+\]
+
+初值：$a_1=k,b_1=0,a_2=k^2,b_2=k$
+
+解得：$b_n=a_{n-1}-b_{n-1}$，代入第一个式子：
+\[
+a_n = ka_{n-1}-(a_{n-1}-b_{n-1}) = (k-1)a_{n-1}+b_{n-1}
+\]
+
+又 $b_n=a_{n-1}-b_{n-1}$，消去 $b_{n-1}$：
+\[
+a_n = (k-1)a_{n-1}+a_{n-2}-b_{n-2} = (k-1)a_{n-1}+a_{n-2}-(a_{n-2}-b_{n-2})
+\]
+
+即 $a_n = (k-1)a_{n-1}+b_{n-1}$
+
+特征方程为 $x^2-(k-1)x-1=0$
+
+解得：$x=\dfrac{k-1\pm\sqrt{(k-1)^2+4}}{2}$
+
+\[
+\Rightarrow
+a_n = \dfrac{k(\dfrac{k-1+\sqrt{(k-1)^2+4}}{2})^n-k(\dfrac{k-1-\sqrt{(k-1)^2+4}}{2})^n}{\sqrt{(k-1)^2+4}}
+\]
+
+
+\subsection*{4.8}
+
+设 $S_n=\sum_{k=1}^n{k^4}$，$S_{n-1}=\sum_{k=1}^{n-1}{k^4}$
+
+则 $S_n-S_{n-1}=n^4$
+
+设 $S_n=an^5+bn^4+cn^3+dn^2+en+f$
+
+代入上式得：$a(n^5-(n-1)^5)+b(n^4-(n-1)^4)+c(n^3-(n-1)^3)+d(n^2-(n-1)^2)+e(n-(n-1))=n^4$
+
+展开得：$a(5n^4-10n^3+10n^2-5n+1)+b(4n^3-6n^2+4n-1)+c(3n^2-3n+1)+d(2n-1)+e=n^4$
+
+比较系数得：
+\[
+\begin{cases}
+5a=1 \\
+-10a+4b=0 \\
+10a-6b+3c=0 \\
+-5a+4b-3c+2d=0 \\
+a-b+c-d+e=0
+\end{cases}
+\]
+
+解得：$a=\dfrac{1}{5},b=\dfrac{1}{2},c=\dfrac{1}{3},d=\dfrac{1}{4},e=0$
+
+故 $S_n=\dfrac{n^5}{5}+\dfrac{n^4}{2}+\dfrac{n^3}{3}-\dfrac{n^2}{4}$
+
+\subsection*{4.9}
+
+(1) 考虑 $f(n,k)$ 的递推关系：
+
+若不选择 $n$，则问题转化为从 $1$ 到 $n-1$ 中选取 $k$ 个不相邻的数，方案数为 $f(n-1,k)$；
+
+若选择 $n$，则不能选择 $n-1$，问题转化为从 $1$ 到 $n-2$ 中选取 $k-1$ 个不相邻的数，方案数为 $f(n-2,k-1)$。
+
+因此有递推关系：$f(n,k)=f(n-1,k)+f(n-2,k-1)$
+
+(2) 猜想：$f(n,k)=\binom{n-k+1}{k}$
+
+当 $k=1$ 时，$f(n,1)=n=\binom{n}{1}$，成立。
+
+当 $k=0$ 时，$f(n,0)=1=\binom{n+1}{0}$，成立。
+
+假设对于所有小于 $n$ 的正整数和小于等于 $k$ 的非负整数，结论成立。
+
+考虑 $f(n,k)$：
+
+$f(n,k)=f(n-1,k)+f(n-2,k-1)$
+
+$=\binom{n-k}{k}+\binom{n-k-1}{k-1}$
+
+$=\binom{n-k+1}{k}$
+
+归纳得证。
+
+(3) 考虑 $g(n,k)$：
+
+若不选择 $n$，则问题转化为从 $1$ 到 $n-1$ 中选取 $k$ 个不相邻的数且首尾不能同时选择，方案数为 $f(n-1,k)$；
+
+若选择 $n$，则不能选择 $1$ 和 $n-1$，问题转化为从 $2$ 到 $n-2$ 中选取 $k-1$ 个不相邻的数，方案数为 $f(n-3,k-1)$；
+
+因此：$g(n,k)=f(n-1,k)+f(n-3,k-1)$
+
+$=\binom{n-k}{k}+\binom{n-k-1}{k-1}$
+
+\subsection*{4.10}
+
+设 $f(n)$ 为铺设 $1 \times n$ 的路径的方案数。
+
+考虑最左边的铺设方式：
+\begin{itemize}
+\item 若使用 $1 \times 1$ 的方砖，则剩余部分为 $f(n-1)$；
+\item 若使用两个直角边长为 $1$ 的等腰直角三角形砖配对，剩余部分为 $f(n-1)$；
+\item 若使用两个斜边长为 $2$ 的等腰直角三角形砖配对，占据长度为 $2$，剩余部分为 $f(n-2)$；
+\item 若使用一个斜边长为 $2$ 的等腰直角三角形砖和两个直角边长为 $1$ 的等腰直角三角形砖组合，占据长度为 $2$，剩余部分为 $f(n-2)$。
+\end{itemize}
+
+因此有递推关系：$f(n)=2f(n-1)+2f(n-2)$
+
+初始值：$f(0)=1$，$f(1)=2$
+
+解得特征方程：$x^2-2x-2=0$
+
+特征根：$x_1=1+\sqrt{3}$，$x_2=1-\sqrt{3}$
+
+通解：$f(n)=c_1(1+\sqrt{3})^n+c_2(1-\sqrt{3})^n$
+
+代入初始值解得：$c_1=\frac{1}{2}+\frac{\sqrt{3}}{6}$，$c_2=\frac{1}{2}-\frac{\sqrt{3}}{6}$
+
+故答案为 $f(n)=(\frac{1}{2}+\frac{\sqrt{3}}{6})(1+\sqrt{3})^n+(\frac{1}{2}-\frac{\sqrt{3}}{6})(1-\sqrt{3})^n$
+
+(2) 设 $g(n)$ 为所有方案中使用的砖数总和。
+
+考虑最左边的铺设方式：
+\begin{itemize}
+\item 使用 $1 \times 1$ 的方砖时，贡献为 $1 \cdot f(n-1)$；
+\item 使用两个直角边长为 $1$ 的等腰直角三角形砖配对时，贡献为 $2 \cdot f(n-1)$；
+\item 使用两个斜边长为 $2$ 的等腰直角三角形砖配对时，贡献为 $2 \cdot f(n-2)$；
+\item 使用一个斜边长为 $2$ 的等腰直角三角形砖和两个直角边长为 $1$ 的等腰直角三角形砖组合时，贡献为 $3 \cdot f(n-2)$。
+\end{itemize}
+
+因此：$g(n)=3f(n-1)+5f(n-2)+g(n-1)+g(n-2)$
+
+初始值：$g(0)=0$，$g(1)=3$
+
+通解为 $g(n)=n[(2+\sqrt{3})(1+\sqrt{3})^n+(2-\sqrt{3})(1-\sqrt{3})^n]$
+
+\end{document}
+

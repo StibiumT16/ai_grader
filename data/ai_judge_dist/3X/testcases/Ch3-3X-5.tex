@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{ctex} % 支持中文
+\setlength{\parindent}{0pt}  % 取消全局缩进
+\title{组合数学: 第三章作业-基本}
+
+\begin{document}
+
+\maketitle
+
+\section*{3.1}
+\textbf{解答：}
+\begin{gather*}
+    \frac{1}{1 - x} = 1 + x + x^2 + x^3 + \dots \\
+\end{gather*} 
+若使$x^n$系数为n的高次幂，易想到求导，则同时对两边求导，有：
+\begin{gather*}
+    \frac{1}{(1 - x)^2} = 1 + 2x + 3x^2 + 4x^3 + \dots \\
+\end{gather*} 
+两边同时乘$x$， 有
+\begin{gather*}
+    \frac{x}{(1 - x)^2} = x + 2x^2 + 3x^3 + 4x^4 + \dots \\
+\end{gather*} 
+继续对两边求导，有：
+\begin{gather*}
+    \frac{1 + x}{(1 - x)^3} = 1 + 4x + 9x^2 + 16x^3 + \dots \\
+\end{gather*} 
+两边同时乘$x$， 有
+\begin{gather*}
+    \frac{x(1 + x)}{(1 - x)^3} = x + 4x^2 + 9x^3 + 16x^4 + \dots \\
+\end{gather*} 
+继续对两边求导，有：
+\begin{gather*}
+    \frac{x^2 + 4x + 1}{(1 - x)^4} = 1 + 8x + 27x^2 + 64x^3 + \dots \\
+\end{gather*} 
+两边同时乘$x$， 有
+\begin{gather*}
+    \frac{x(x^2 + 4x + 1)}{(1 - x)^4} = x + 8x^2 + 27x^3 + 64x^4 + \dots \\
+\end{gather*} 
+即$a^n$母函数为$\frac{x(x^2 + 4x + 1)}{(1 - x)^4}$
+
+\section*{3.2}
+\textbf{解答：}
+$a_n = \binom{n+3}{3} = \frac{(n + 3)(n + 2)(n + 1)}{6} = \frac{n^3 + 6n^2 + 11n + 6}{6} $，
+由3.1已推出公式：
+\begin{gather*}
+    \frac{1}{1 - x} = 1 + x + x^2 + x^3 + \dots \\
+    \frac{x}{(1 - x)^2} = x + 2x^2 + 3x^3 + 4x^4 + \dots \\
+    \frac{x(1 + x)}{(1 - x)^3} = x + 4x^2 + 9x^3 + 16x^4 + \dots \\
+    \frac{x(x^2 + 4x + 1)}{(1 - x)^4} = x + 8x^2 + 27x^3 + 64x^4 + \dots \\
+\end{gather*} 
+则$a_n$母函数为
+$\frac{1}{6}\frac{x(x^2 + 4x + 1)}{(1 - x)^4} + \frac{x(1 + x)}{(1 - x)^3} + \frac{11}{6}\frac{x}{(1 - x)^2} + \frac{1}{1 - x} = \frac{1}{(1-x)^4}$
+
+\section*{3.3}
+\textbf{解答：}
+$a_n = \sum_{k=1}^{n + 1} k^3$,
+由3.1已推出公式：
+\begin{gather*}
+    \frac{x(x^2 + 4x + 1)}{(1 - x)^4} = x + 8x^2 + 27x^3 + 64x^4 + \dots \\
+\end{gather*} 
+则有
+\begin{gather*}
+    x\frac{x(x^2 + 4x + 1)}{(1 - x)^4} = x^2 + 8x^3 + 27x^4 + 64x^5 + \dots \\
+\end{gather*} 
+注意到此时对于$x^n$项而言，已凑出$(n-1)^3x^n$项\\
+依次类推，继续乘x，有
+\begin{gather*}
+    x^2\frac{x(x^2 + 4x + 1)}{(1 - x)^4} = x^3 + 8x^4 + 27x^5 + 64x^6 + \dots \\
+    x^3\frac{x(x^2 + 4x + 1)}{(1 - x)^4} = x^4 + 8x^5 + 27x^6 + 64x^7 + \dots \\
+    x^4\frac{x(x^2 + 4x + 1)}{(1 - x)^4} = x^5 + 8x^6 + 27x^7 + 64x^8 + \dots \\
+    \vdots  
+\end{gather*} 
+需要注意$a_n$最终累加至$n+1$，因此还有一项：
+\begin{gather*}
+    \frac{x^2 + 4x + 1}{(1 - x)^4} = 1 + 8x + 27x^2 + 64x^3 + \dots \\
+\end{gather*} 
+将所有项全部累加，最终$a_n$母函数为
+$\frac{x^2 + 4x + 1}{(1 - x)^5}$
+
+\section*{3.4}
+\textbf{解答：}
+由于$b_n = a_n - a_{n - 1}$,因此需要凑出$a_{k - 1}x^k$项，则有
+\begin{gather*}
+    xA(x) = a_0x + a_1x^2 + a_2x^3 + a_3x^4 + \dots + a_kx^{k + 1} + \dots\\
+\end{gather*} 
+于是有
+\begin{gather*}
+    (1 - x)A(x) = a_0 + (a_1 - a_0)x + (a_2 - a_1)x^2 + (a_3 - a_2)x^3 + \dots + (a_k - a_{k - 1})x^k + \dots\\
+    (1 - x)A(x) = b_0 + b_1x + b_2x^2 + b_3x^3 + \dots + b_kx^k + \dots \\
+    (1 - x)A(x) = B(x)
+\end{gather*} 
+因此$b_n$母函数为$\frac{4 - 3x}{1 + x - x^3}$
+\end{document}
+
+
+
