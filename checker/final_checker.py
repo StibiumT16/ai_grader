@@ -144,7 +144,7 @@ class FinalChecker(BaseChecker):
                 
                 for i, rule in enumerate(ref_solution.rules):
                     if i == 0: student_solution.add_score(rule, final_reason, final_score)
-                    else: student_solution.add_score(rule, "", 0.)
+                    else: student_solution.add_score(rule, "<Empty>", 0.)
                     
                 student_solution.finalize(ref_solution.rules)
 
