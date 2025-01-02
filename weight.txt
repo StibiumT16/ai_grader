@@ -1,0 +1,4 @@
+max pearson  0.9999999587605777
+gpt-4o-mini 0.12
+chatglm-4-air 0.24
+deepseek-chat 0.64
