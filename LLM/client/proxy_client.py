@@ -5,7 +5,7 @@ from .api_pool.api_pool import api_pool
 class ProxyClient(BaseClient):
     def __init__(self, model_name):
         if model_name not in api_pool:
-            raise ValueError("Invalid model name")
+            raise ValueError(f"Invalid model name: {model_name}")
         self.query_function = api_pool[model_name]
 
     def send_request(
