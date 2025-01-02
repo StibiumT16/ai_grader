@@ -2,3 +2,4 @@ tenacity
 openai
 tqdm
 requests
+zhipuai
