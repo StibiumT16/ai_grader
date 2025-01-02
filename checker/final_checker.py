@@ -121,6 +121,8 @@ class FinalChecker(BaseChecker):
                     rule_text += f'第{i+1}步，分值为{rule.score}：{rule.rule}\n'
                     total_score += float(rule.score)
                 
+                if final_score > total_score: final_score = total_score #Fix
+                
                 tqdm.write(f"Problem {problem_id} sub-Problem {subproblem_id}:  Final Score {final_score} / {total_score}")
                    
                 judge_reason_inputs = judge_reason_input(
