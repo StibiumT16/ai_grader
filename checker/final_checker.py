@@ -54,7 +54,7 @@ class FinalChecker(BaseChecker):
                 # For each judger LLM, seperately generate the correctness and rule-based scores:
                 
                 final_score = 0.
-                for llm, weight in tqdm(zip(self.LLMs, self.weights)):
+                for llm, weight in zip(self.LLMs, self.weights):
                     
                     # 1. Correctness Check   
                     correct_check_inputs = correct_check_input(
